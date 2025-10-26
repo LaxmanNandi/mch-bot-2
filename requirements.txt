@@ -1,0 +1,6 @@
+numpy>=1.26
+pandas>=2.1
+PyYAML>=6.0
+kiteconnect>=5.0
+requests>=2.32
+python-telegram-bot>=20.6

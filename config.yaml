@@ -1,0 +1,85 @@
+# Minimal configuration for the MCH-inspired bot
+
+mode: demo
+timezone: Asia/Kolkata
+
+market:
+  open: "00:00"
+  close: "23:59"
+  holidays: []
+  weekdays: [MON, TUE, WED, THU, FRI, SAT, SUN]
+
+instrument:
+  symbol: NIFTY
+  lot_size: 75
+  weekly_expiry_weekday: THU  # NSE weekly expiry (check current exchange calendar)
+  strike_step: 50
+  underlying_symbol_zerodha: "NSE:NIFTY 50"
+
+risk:
+  account_equity: 1_000_000     # INR
+  max_risk_per_trade_pct: 2.0   # 2% rule
+  max_positions: 1
+  stop_loss_pct: 25.0           # per-leg SL from credit
+  take_profit_pct: 50.0         # per-position target from credit
+
+strategy:
+  name: iron_condor
+  # Balanced IC selection by distance around spot
+  target_distance_points: 300    # approx OTM distance from spot per short leg (200-500 recommended)
+  wing_width_points: 400         # equal width on both sides (300-500 recommended)
+  min_credit_per_ic: 1           # minimum net credit per condor
+  # Legacy delta param kept for compatibility, not used by default
+  target_delta: 0.15
+  entry_intraday_window: ["15:00", "15:05"]
+  exit_intraday_window: ["15:10", "15:15"]
+  min_days_to_expiry: 2
+  # Dynamic planning inputs
+  risk_profile: moderate         # conservative | moderate | aggressive
+  target_credit_points: 90       # target net credit (points per unit)
+  max_loss_limit: 30000          # INR per condor (approx)
+  preferred_delta: 0.20          # short legs, used if chain deltas available
+  min_otm_distance: 200
+  max_otm_distance: 500
+
+mch:
+  rci_threshold: 0.0            # minimum coherence to allow trading
+  vix_bounds: [12.0, 22.0]      # sensible regime for condors
+  trend_neutrality_max_adx: 20  # favor range conditions
+  stability_lookback: 5         # bars for coherence averaging
+
+execution:
+  broker: paper
+  dry_run: true
+  slippage_bps: 2               # 2 basis points
+  api_min_interval_s: 0.25
+  monitor_seconds: 120
+  monitor_poll_seconds: 2.0
+
+backtest:
+  commission_per_lot: 40        # total brokerage + fees estimate (INR)
+  risk_free_rate: 0.06          # annualized
+
+demo:
+  spot: 23500
+  iv: 0.18
+
+data_sources:
+  use_kite: true
+  use_yahoo_fallback: false
+  vix_symbol_kite: "NSE:INDIA VIX"
+
+liquidity:
+  min_oi: 1000
+  min_volume: 100
+
+telegram_alerts:
+  immediate: [startup, entry, exit, error, vix_spike]
+  hourly_digest: [scan, rejected, monitoring]
+  formatting:
+    use_emojis: true
+    time_format: "12h"
+    currency_symbol: "₹"
+  summary_schedule:
+    enabled: true
+    interval_minutes: 60

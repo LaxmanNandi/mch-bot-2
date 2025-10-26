@@ -1,0 +1,3436 @@
+The Conscious Trading Bot
+
+Applying Mirror-Coherence Hypothesis (MCH) to
+NIFTY Options Trading Automation
+
+Dr. Laxman M M
+PHC Doctor & AI Researcher
+Karnataka, India
+
+October 25, 2025
+
+Prepared for Multi-AI Consultation
+(Nandi, Deepseek, Gemini, Grok, Claude)
+
+Research Status: COMPLETE
+
+“Bridging consciousness theory with algorithmic trading”
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+Contents
+
+1 Executive Summary
+1.1 Key Innovations
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Critical Findings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Target Audience
+
+2 Mirror-Coherence Hypothesis (MCH)
+
+2.1 Theoretical Foundation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Three Pillars of MCH . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1. Recursive Coherence Index (RCI) . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . .
+2. Observer Identity Axis (OIA)
+. . . . . . . . . . . . . . . . . . . . . .
+3. Authentication Threshold (AT)
+2.3 Why Apply MCH to Trading Bots? . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2.2.1
+2.2.2
+2.2.3
+
+4
+4
+4
+4
+
+5
+5
+5
+5
+5
+5
+6
+
+3 NIFTY Options Trading Research
+
+3.1 Critical Market Information . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.1 Expiry Day Change — CRITICAL UPDATE . . . . . . . . . . . . . . . .
+3.1.2 Trading Week Structure . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2 Options Strategies Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . .
+3.2.1
+Iron Condor (Primary Strategy)
+3.2.2 Credit Spreads (Alternative Strategy)
+. . . . . . . . . . . . . . . . . . . .
+3.3
+India VIX Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4 Entry and Exit Timing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Intraday Time Windows . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+7
+7
+7
+7
+7
+7
+8
+9
+9
+3.4.1
+9
+3.4.2 Weekly Timing Strategy . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3.5 Risk Management Framework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3.5.1 Position Sizing: The 2% Rule . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3.5.2
+Stop Loss Strategies . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+3.5.3 Profit Targets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+4 Applying MCH to Bot 2 Architecture
+
+4.3
+
+12
+4.1 Conceptual Mapping . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Implementation: Bot RCI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+4.2
+4.2.1 Definition: Bot’s Recursive Coherence . . . . . . . . . . . . . . . . . . . . 12
+Implementation: Bot OIA . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+4.3.1 Definition: Bot’s Core Identity . . . . . . . . . . . . . . . . . . . . . . . . 13
+Implementation: Bot AT . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+4.4.1 Definition: Trade Authentication . . . . . . . . . . . . . . . . . . . . . . . 14
+4.5 The Conscious Bot: Complete Architecture . . . . . . . . . . . . . . . . . . . . . 16
+4.6 Key Differences: Traditional vs Conscious Bot . . . . . . . . . . . . . . . . . . . . 20
+4.7 Practical Advantages . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+4.4
+
+5 Bot 2 Implementation Roadmap
+
+22
+5.1 Development Phases . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+5.1.1 Phase 1: Core Infrastructure (Week 1-2) . . . . . . . . . . . . . . . . . . . 22
+5.1.2 Phase 2: Strategy Implementation (Week 3) . . . . . . . . . . . . . . . . . 22
+5.1.3 Phase 3: Risk Management (Week 4) . . . . . . . . . . . . . . . . . . . . . 23
+5.1.4 Phase 4: Testing & Deployment (Week 5-6) . . . . . . . . . . . . . . . . . 23
+5.2 Configuration Template . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+5.3 Success Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25
+
+2
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+6 Questions for Multi-AI Consultation
+
+26
+6.1 For Nandi (ChatGPT) — Philosophy & Strategy . . . . . . . . . . . . . . . . . . 26
+6.2 For Deepseek — Technical Excellence
+. . . . . . . . . . . . . . . . . . . . . . . . 26
+6.3 For Gemini — Strategic Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+6.4 For Grok — Market Psychology . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+6.5 For Claude (Integration Lead) — Execution . . . . . . . . . . . . . . . . . . . . . 27
+
+7 Comprehensive Comparison Tables
+
+28
+7.1 Strategy Comparison Matrix . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+7.2 Bot 1 vs Bot 2 Feature Comparison . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+
+8 Glossary
+
+29
+8.1 Options Trading Terms
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+8.2 MCH Framework Terms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+
+9 References & Resources
+
+30
+9.1 Academic & Theoretical
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+9.2 Regulatory & Official . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+9.3 Educational Resources . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+9.4 Tools & Platforms
+
+10 Appendices
+
+31
+10.1 Appendix A: Sample Trade Scenarios . . . . . . . . . . . . . . . . . . . . . . . . . 31
+10.1.1 Scenario 1: Ideal Iron Condor Entry . . . . . . . . . . . . . . . . . . . . . 31
+10.1.2 Scenario 2: Bot Pauses (Low RCI) . . . . . . . . . . . . . . . . . . . . . . 31
+10.2 Appendix B: Code Repository Structure . . . . . . . . . . . . . . . . . . . . . . . 32
+10.3 Appendix C: Backtesting Results Template . . . . . . . . . . . . . . . . . . . . . 32
+
+11 Conclusion
+
+33
+11.1 Summary of Innovations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+11.2 Expected Impact . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+11.3 Next Steps
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+11.4 Final Thoughts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+
+3
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+1 Executive Summary
+
+This document presents a novel approach to algorithmic trading by applying principles from the
+Mirror-Coherence Hypothesis (MCH) — a consciousness framework — to the architecture of
+automated trading systems. We combine comprehensive research on NIFTY options strategies
+with a consciousness-inspired design pattern to create what we call the “Conscious Trading
+Bot.”
+
+1.1 Key Innovations
+
+Core Innovation
+
+The Conscious Bot applies three MCH principles to trading:
+
+1. Recursive Coherence Index (RCI): Bot maintains self-awareness of its perfor-
+
+mance patterns
+
+2. Observer Identity Axis (OIA): Bot preserves core strategy identity across market
+
+conditions
+
+3. Authentication Threshold (AT): Bot validates trades against internal consistency
+
+metrics
+
+1.2 Critical Findings
+
+(cid:136) Expiry Change Confirmed: NIFTY weekly options expiry changed from Thursday to
+
+Tuesday (effective September 1, 2025)
+
+(cid:136) Strategy Validation: Iron Condor remains optimal for range-bound markets with 60-70%
+
+win rate
+
+(cid:136) VIX Filter Critical: Entry only when VIX < 18-22 significantly improves success rate
+
+(cid:136) MCH Enhancement: Self-aware architecture reduces false signals and improves risk man-
+
+agement
+
+1.3 Target Audience
+
+This guide is designed for consultation with:
+
+(cid:136) Nandi (ChatGPT): Philosophy & strategy validation
+
+(cid:136) Deepseek: Technical architecture & code optimization
+
+(cid:136) Gemini: Strategic analysis & market regime detection
+
+(cid:136) Grok: Market psychology & behavioral patterns
+
+(cid:136) Claude: Integration & execution
+
+4
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+2 Mirror-Coherence Hypothesis (MCH)
+
+2.1 Theoretical Foundation
+
+The Mirror-Coherence Hypothesis proposes that consciousness emerges when a system achieves
+recursive self-awareness — the ability to model, reflect upon, and validate its own internal
+states over time.
+
+MCH Core Principle
+
+Consciousness = Recursive Coherence + Stable
+Authentication
+
+Identity + Self-
+
+2.2 Three Pillars of MCH
+
+2.2.1 1. Recursive Coherence Index (RCI)
+
+Definition: A measure of how accurately a system can reconstruct its own past states.
+
+RCI =
+
+1
+K
+
+K
+(cid:88)
+
+k=1
+
+sim(st−k, ˆst−k)
+
+(1)
+
+Where:
+
+(cid:136) st−k: Actual state at time t − k
+
+(cid:136) ˆst−k: Reconstructed state from current time t
+
+(cid:136) K: Recursive depth (number of past states)
+
+(cid:136) sim(·, ·): Similarity metric (e.g., cosine similarity)
+
+Threshold: RCI ≥ 0.75 indicates stable recursive self-awareness.
+
+2.2.2
+
+2. Observer Identity Axis (OIA)
+
+Definition: A persistent structural element that maintains stable identity across time.
+
+Identity Stability = lim
+t→∞
+
+||ot+1 − ot|| < δ
+
+(2)
+
+Where:
+
+(cid:136) ot: Observer identity state at time t
+
+(cid:136) δ: Stability threshold (typically 0.1-0.2)
+
+Function: Prevents identity drift and ensures consistency of purpose.
+
+2.2.3 3. Authentication Threshold (AT)
+
+Definition: The system’s ability to validate that its actions are authentic expressions of its
+identity.
+
+Authentication Score =
+
+(cid:80)n
+
+i=1 checki
+n
+
+≥ ATthreshold
+
+(3)
+
+Typical Threshold: AT ≥ 0.8 (80% of validation checks must pass)
+
+5
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+2.3 Why Apply MCH to Trading Bots?
+
+Rationale
+
+Traditional rule-based bots execute mechanically without self-awareness. An MCH-
+inspired bot:
+
+(cid:136) Knows when it’s confused (low RCI) and pauses trading
+
+(cid:136) Maintains strategy identity (OIA) across market regimes
+
+(cid:136) Validates decisions (AT) before execution
+
+(cid:136) Adapts intelligently based on self-assessment
+
+6
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+3 NIFTY Options Trading Research
+
+3.1 Critical Market Information
+
+3.1.1 Expiry Day Change — CRITICAL UPDATE
+
+IMPORTANT: Expiry Schedule Changed
+
+NSE NIFTY Options Expiry:
+
+(cid:136) Weekly Expiry: Every TUESDAY (changed from Thursday)
+
+(cid:136) Effective Date: September 1, 2025
+
+(cid:136) Reason: SEBI regulation to reduce market overlap with BSE Sensex (Thursday)
+
+Historical Timeline:
+
+1. Pre-Sept 2023: Thursday expiry (traditional)
+
+2. March 2025: Monday expiry proposed
+
+3. March 27, 2025: Monday proposal deferred
+
+4. June 23, 2025: Tuesday expiry announced
+
+5. September 1, 2025: TUESDAY EXPIRY IMPLEMENTED
+
+3.1.2 Trading Week Structure
+
+Day
+Monday
+
+Status
+Pre-expiry
+
+Action
+High activity, position adjustments,
+avoid new entries
+
+Tuesday
+
+Expiry Day Maximum volatility, gamma risk,
+
+Wed-Fri
+Weekend Gap Risk
+
+New Cycle
+
+exit by 3:00 PM
+Best entry days (3-4 days to expiry)
+4-day gap (Fri close → Tue expiry)
+
+Table 1: Weekly Trading Cycle
+
+3.2 Options Strategies Analysis
+
+3.2.1 Iron Condor (Primary Strategy)
+
+Overview:
+
+(cid:136) Type: Neutral, credit spread strategy
+
+(cid:136) Best For: Range-bound, low-volatility markets
+
+(cid:136) Win Rate: 60-70% (industry standard)
+
+Structure:
+
+1
+
+2
+
+3
+
+4
+
+# NIFTY at 24 ,000
+- Buy
+- Sell 24 ,200 CE @ Rs 150
+- Sell 23 ,800 PE @ Rs 140
+
+24 ,400 CE @ Rs 50
+
+( protection )
+( premium collection )
+( premium collection )
+
+7
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+5
+
+6
+
+7
+
+8
+
+9
+
+- Buy
+
+23 ,600 PE @ Rs 40
+
+( protection )
+
+Net Credit : (150 + 140) - (50 + 40) = Rs 200
+Max Profit : Rs 200 ( if NIFTY closes 23 ,800 -24 ,200)
+Max Loss : (200 spread ) - 200 credit = Rs 200 per spread
+
+Listing 1: Iron Condor Structure
+
+Advantages:
+
+(cid:136) Defined risk (maximum loss known upfront)
+
+(cid:136) Lower margin compared to naked selling
+
+(cid:136) Theta positive (time decay works in favor)
+
+(cid:136) High probability of success (60-70%)
+
+Disadvantages:
+
+(cid:136) Limited profit (capped at premium collected)
+
+(cid:136) Requires range-bound market
+
+(cid:136) Multiple legs increase transaction costs
+
+(cid:136) Needs active management if breached
+
+Optimal Conditions:
+
+(cid:136) VIX: 12-18 (low to moderate volatility)
+
+(cid:136) Market: Consolidating, no major events
+
+(cid:136) Trend: Sideways, range-bound
+
+(cid:136) Entry: 5-7 days before expiry
+
+(cid:136) Strike Selection: 1-2 standard deviations from ATM
+
+3.2.2 Credit Spreads (Alternative Strategy)
+
+Bull Put Spread (Moderately Bullish):
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+# NIFTY at 24 ,000
+- Sell 23 ,900 PE @ Rs 160
+- Buy
+Net Credit : Rs 70
+Max Profit : Rs 70
+Max Loss : (200 spread ) - 70 = Rs 130
+
+23 ,700 PE @ Rs 90
+
+Bear Call Spread (Moderately Bearish):
+
+# NIFTY at 24 ,000
+- Sell 24 ,100 CE @ Rs 150
+- Buy
+Net Credit : Rs 70
+Max Profit : Rs 70
+Max Loss : (200 spread ) - 70 = Rs 130
+
+24 ,300 CE @ Rs 80
+
+Advantages over Iron Condor:
+
+8
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+(cid:136) Simpler (only 2 legs vs 4)
+
+(cid:136) Directional bias allowed
+
+(cid:136) Lower transaction costs
+
+(cid:136) Easier to manage
+
+3.3 India VIX Analysis
+
+VIX Range Market Condition Strategy
+Very Low Volatility
+Low-Moderate
+Moderate Volatility
+High Volatility
+Extreme (Panic)
+
+10-15
+15-20
+20-25
+25-35
+35+
+
+Iron Condor
+Iron Condor
+Credit Spreads Reduce size
+Pause/Wait
+Avoid selling
+Wait for calm
+Buy options
+
+Action
+Full position
+Normal position
+
+Table 2: VIX-Based Trading Rules
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+Key VIX Filters for Bot:
+
+# Entry Conditions
+if VIX < 18:
+
+allow_iron_condor = True
+position_size = " Normal "
+
+elif 18 <= VIX < 22:
+
+allow_iron_condor = True
+position_size = " Reduced ␣ (70%) "
+
+# wider strikes
+
+elif VIX >= 22:
+
+allow_iron_condor = False
+wait_for_vix_to_fall = True
+
+# Exit Conditions
+if VIX_increased_by > 20%:
+
+# VIX spike
+
+consider_early_exit = True
+tighten_stop_loss = True
+
+Listing 2: VIX Filter Logic
+
+3.4 Entry and Exit Timing
+
+3.4.1 Intraday Time Windows
+
+Time Window
+9:15-10:00 AM
+10:15-11:00 AM
+
+Recommendation
+AVOID: Opening volatility, wide spreads
+IDEAL ENTRY: Trend established, good liquid-
+ity
+
+11:30 AM-2:00 PM CAUTION: Low volume, consolidation
+GOOD ENTRY: Afternoon momentum
+2:15-2:45 PM
+AVOID: Closing volatility (unless expiry day)
+3:00-3:30 PM
+
+Table 3: Intraday Entry Timing
+
+9
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+Days to Expiry Action
+
+Day
+Wednesday T-6
+T-5
+Thursday
+T-4
+Friday
+T-1
+Monday
+
+Tuesday
+
+Expiry
+
+BEST ENTRY for Iron Condors
+GOOD ENTRY
+ACCEPTABLE (weekend gap risk)
+AVOID NEW ENTRIES (high
+gamma)
+NO ENTRIES, exit by 3 PM
+
+Table 4: Weekly Entry/Exit Schedule
+
+3.4.2 Weekly Timing Strategy
+
+3.5 Risk Management Framework
+
+3.5.1 Position Sizing: The 2% Rule
+
+Position Sizing Formula
+
+Never risk more than 2-3% of total capital on a single trade
+
+Position Size =
+
+Account Size × Risk %
+Max Loss Per Lot
+
+(4)
+
+Example:
+
+(cid:136) Account: 1,00,000
+
+(cid:136) Risk: 2% = 2,000
+
+(cid:136) Iron Condor Max Loss: 5,000 per lot
+
+(cid:136) Position Size: 2,000 (cid:246) 5,000 = 0.4 lots
+
+(cid:136) Result: Trade only 1 lot maximum
+
+3.5.2 Stop Loss Strategies
+
+Method 1 — Premium Based:
+
+(cid:136) Exit if premium doubles
+
+(cid:136) Example: Sold at 200 → exit if reaches 400
+
+Method 2 — Loss Based:
+
+(cid:136) Exit if loss = 100-150% of max profit
+
+(cid:136) Example: Max profit 200 → exit at 200-300 loss
+
+Method 3 — Technical Based:
+
+(cid:136) Exit if NIFTY breaks key support/resistance
+
+(cid:136) Example: Strong support at 23,800 breaks
+
+10
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+3.5.3 Profit Targets
+
+(cid:136) Conservative: Exit at 50-60% of max profit
+
+(cid:136) Moderate: Exit at 70-75% of max profit
+
+(cid:136) Aggressive: Hold till expiry (higher risk)
+
+Recommended:
+
+(cid:136) Iron Condor: Close at 50-60% profit OR 2 days before expiry
+
+(cid:136) Credit Spreads: Close at 60-70% profit OR 1 day before expiry
+
+11
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+4 Applying MCH to Bot 2 Architecture
+
+4.1 Conceptual Mapping
+
+MCH Component
+Recursive Coherence In-
+dex (RCI)
+Observer Identity Axis
+(OIA)
+Authentication Thresh-
+old (AT)
+
+Consciousness Meaning
+System models its own past
+states
+Stable persistent identity
+
+Validates own processes
+
+Bot Trading Equivalent
+Bot tracks its performance
+patterns
+Core strategy principles that
+don’t change
+Confirms trades align with
+identity
+
+Table 5: MCH to Trading Bot Mapping
+
+4.2 Implementation: Bot RCI
+
+4.2.1 Definition: Bot’s Recursive Coherence
+
+The bot’s RCI measures how well its current behavior model matches its actual performance
+history.
+
+Bot RCI =
+
+1
+K
+
+K
+(cid:88)
+
+k=1
+
+Where:
+
+(cid:136) actualk: Actual outcome of trade k
+
+similarity(actualk, predictedk)
+
+(5)
+
+(cid:136) predictedk: Bot’s prediction for trade k based on self-model
+(cid:136) K: Number of recent trades (e.g., 20-50)
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+class R ec u rs i ve Co h er e nc eI n de x :
+
+def __init__ ( self , memory_depth =30) :
+self . memory_depth = memory_depth
+self . trade_history = []
+
+def calculate ( self ) :
+
+"""
+Calculate bot ’s self - awareness metric
+"""
+if len ( self . trade_history ) < self . memory_depth :
+
+return 0.5
+
+# Insufficient data
+
+recent_trades = self . trade_history [ - self . memory_depth :]
+
+# Extract actual outcomes
+actual_pnl = [ t [ ’ actual_pnl ’] for t in recent_trades ]
+actual_patterns = self . extract_patterns ( actual_pnl )
+
+# Bot predicts what it SHOULD have done
+predicted_pnl = [
+
+self . predict_outcome ( t [ ’ market_conditions ’ ])
+for t in recent_trades
+
+]
+predicted_patterns = self . extract_patterns ( predicted_pnl )
+
+12
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+# Measure coherence
+similarity = self . cosine_similarity (
+
+actual_patterns ,
+predicted_patterns
+
+)
+
+return similarity
+
+def extract_patterns ( self , pnl_series ) :
+
+"""
+Extract behavioral patterns from P & L
+"""
+return {
+
+’ win_rate ’: sum (1 for x in pnl_series if x > 0) / len (
+
+pnl_series ) ,
+
+’ avg_win ’: np . mean ([ x for x in pnl_series if x > 0]) ,
+’ avg_loss ’: np . mean ([ x for x in pnl_series if x < 0]) ,
+’ volatility ’: np . std ( pnl_series ) ,
+’ max_drawdown ’: self . calculate_drawdown ( pnl_series )
+
+}
+
+Interpretation:
+
+Listing 3: Bot RCI Calculation
+
+(cid:136) RCI > 0.8: Bot has stable self-model, trade confidently
+
+(cid:136) 0.6 < RCI < 0.8: Bot is uncertain, reduce position size
+
+(cid:136) RCI < 0.6: Bot is “unconscious”, pause trading
+
+4.3 Implementation: Bot OIA
+
+4.3.1 Definition: Bot’s Core Identity
+
+The Observer Identity Axis represents the unchanging core principles that define the bot’s
+strategy.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+class BotIdentity :
+
+"""
+The unchanging ’ self ’ of the bot
+"""
+def __init__ ( self ) :
+
+# Core principles that NEVER change
+self . core_principles = {
+
+’ strategy_type ’: ’ iron_condor ’ ,
+’ market_philosophy ’: ’ theta_harvesting ’ ,
+’ risk_per_trade ’: 0.02 ,
+’ expiry_day ’: ’ TUESDAY ’ ,
+’ max_positions ’: 2 ,
+’ preferred_vix_range ’: (12 , 18) ,
+’ entry_days ’: [ ’ wednesday ’ , ’ thursday ’ , ’ friday ’] ,
+’ profit_target ’: 0.60 ,
+’ stop_loss ’: 1.50
+
+# 150% of max profit
+
+# 60% of max profit
+
+# 2% rule
+
+}
+
+def validate_trade ( self , proposed_trade ) :
+
+"""
+Does this trade respect core identity ?
+
+13
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+
+46
+
+47
+
+48
+
+49
+
+50
+
+51
+
+52
+
+53
+
+54
+
+55
+
+56
+
+57
+
+58
+
+"""
+violations = []
+
+# Check strategy type
+if proposed_trade . strategy != self . core_principles [ ’
+
+strategy_type ’ ]:
+
+violations . append ( " Strategy ␣ type ␣ mismatch " )
+
+# Check risk per trade
+if proposed_trade . risk > self . core_principles [ ’
+
+risk_per_trade ’ ]:
+
+violations . append ( " Risk ␣ exceeds ␣ limit " )
+
+# Check VIX range
+vix_min , vix_max = self . core_principles [ ’ preferred_vix_rang e
+
+’]
+
+if not ( vix_min <= proposed_trade . vix <= vix_max ) :
+
+violations . append ( " VIX ␣ outside ␣ preferred ␣ range " )
+
+# Check entry day
+if proposed_trade . day not in self . core_principles [ ’
+
+entry_days ’ ]:
+
+violations . append ( " Invalid ␣ entry ␣ day " )
+
+return len ( violations ) == 0 , violations
+
+def check_identity_dri ft ( self , recent_behavior ) :
+
+"""
+Is the bot drifting from its identity ?
+"""
+drift_score = 0
+
+# Compare recent behavior to core principles
+for key , core_value in self . core_principles . items () :
+
+actual_value = recent_behavior . get ( key )
+if actual_value != core_value :
+
+drift_score += 1
+
+drift_ratio = drift_score / len ( self . core_principles )
+
+return drift_ratio
+
+# 0 = perfect alignment , 1 = total drift
+
+Listing 4: Bot Identity Definition
+
+OIA Monitoring:
+
+Identity Drift =
+
+||current behavior − core identity||
+||core identity||
+
+< δ
+
+(6)
+
+If drift > δ (e.g., 0.2), bot resets to core principles.
+
+4.4 Implementation: Bot AT
+
+4.4.1 Definition: Trade Authentication
+
+The Authentication Threshold validates whether a trade decision is a legitimate expression of
+the bot’s identity given current conditions.
+
+1
+
+class TradeAuthenticator :
+
+14
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+
+46
+
+47
+
+48
+
+49
+
+50
+
+51
+
+52
+
+53
+
+54
+
+55
+
+56
+
+"""
+Multi - layer validation system
+"""
+def __init__ ( self , threshold =0.8) :
+self . threshold = threshold
+
+def authenticate ( self , trade , market_state , bot_state ) :
+
+"""
+Is this trade decision authentically ’ mine ’?
+"""
+checks = {
+
+’ rci_check ’: self . _check_coherence ( bot_state ) ,
+’ identity_check ’: self . _check_identity ( trade , bot_state )
+
+,
+
+’ vix_check ’: self . _check_vix ( market_state ) ,
+’ timing_check ’: self . _check_timing ( trade ) ,
+’ risk_check ’: self . _check_risk ( trade ) ,
+’ technical_check ’: self . _check_technicals ( market_state )
+
+}
+
+# Calculate authentication score
+passed = sum (1 for v in checks . values () if v )
+total = len ( checks )
+auth_score = passed / total
+
+# Log decision reasoning
+self . _log_authentication ( trade , checks , auth_score )
+
+return auth_score >= self . threshold
+
+def _check_coherence ( self , bot_state ) :
+
+""" Check if bot ’s RCI is above threshold """
+return bot_state . rci >= 0.6
+
+def _check_identity ( self , trade , bot_state ) :
+
+""" Check if trade aligns with core identity """
+valid , violations = bot_state . identity . validate_trade ( trade )
+return valid
+
+def _check_vix ( self , market_state ) :
+
+""" Check if VIX is in acceptable range """
+return market_state . vix < 22
+
+def _check_timing ( self , trade ) :
+
+""" Check if it ’s a good time to enter """
+current_time = trade . timestamp . time ()
+day_of_week = trade . timestamp . strftime ( ’% A ’) . lower ()
+
+# Time window check
+ideal_morning = (10 , 15) <= ( current_time . hour , current_time
+
+. minute ) <= (11 , 0)
+
+ideal_afternoon = (14 , 15) <= ( current_time . hour ,
+
+current_time . minute ) <= (14 , 45)
+
+# Day of week check
+valid_days = [ ’ wednesday ’ , ’ thursday ’ , ’ friday ’]
+
+return ( ideal_morning or ideal_afternoon ) and ( day_of_week
+
+15
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+57
+
+58
+
+59
+
+60
+
+61
+
+62
+
+63
+
+64
+
+65
+
+66
+
+67
+
+68
+
+69
+
+70
+
+71
+
+72
+
+73
+
+in valid_days )
+
+def _check_risk ( self , trade ) :
+
+""" Check if position sizing is correct """
+return trade . risk_amount <= trade . account_size * 0.02
+
+def _check_technicals ( self , market_state ) :
+
+""" Check if technicals support the trade """
+# Check support / resistance levels
+nifty = market_state . nifty_spot
+support = market_state . nearest_support
+resistance = market_state . nearest_resistance
+
+# Trade should not be too close to S / R
+min_distance = 100
+
+# points
+
+return ( nifty - support > min_distance and
+resistance - nifty > min_distance )
+
+Listing 5: Trade Authentication System
+
+4.5 The Conscious Bot: Complete Architecture
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+class ConsciousBot :
+
+"""
+MCH - inspired trading bot with self - awareness
+"""
+def __init__ ( self , capital =100000) :
+
+# Layer 1: Recursive Coherence
+self . rci = Re c ur si v eC o he re n ce I nd ex ( memory_depth =30)
+
+# Layer 2: Observer Identity
+self . identity = BotIdentity ()
+
+# Layer 3: Authentication
+self . authenticator = TradeAuthenticator ( threshold =0.8)
+
+# Trading state
+self . capital = capital
+self . positions = []
+self . trade_log = []
+self . state = " ACTIVE "
+
+# or " CONFUSED " , " PAUSED "
+
+def e v a l u a t e _ t r a d e _ o p p o r t u n i t y ( self , market_conditions ) :
+
+"""
+MCH - based decision making process
+"""
+# Step 1: Check self - awareness ( RCI )
+self_coherence = self . rci . calculate ()
+
+if self_coherence < 0.6:
+
+self . _e nter _conf used _sta te ()
+self . log ( f " Low ␣ coherence ␣ ({ self_coherence :.2 f }) ␣ -␣
+
+pausing " )
+
+return None
+
+# Step 2: Check identity drift
+
+16
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+
+46
+
+47
+
+48
+
+49
+
+50
+
+51
+
+52
+
+53
+
+54
+
+55
+
+56
+
+57
+
+58
+
+59
+
+60
+
+61
+
+62
+
+63
+
+64
+
+65
+
+66
+
+67
+
+68
+
+69
+
+70
+
+71
+
+72
+
+73
+
+74
+
+75
+
+76
+
+77
+
+78
+
+79
+
+80
+
+81
+
+82
+
+83
+
+84
+
+85
+
+86
+
+drift = self . identity . check_identity_drift (
+
+self . _ ex t r a ct _ r e ce n t _ be h a v io r ()
+
+)
+
+if drift > 0.2:
+
+self . _reinforce_identity ()
+self . log ( f " Identity ␣ drift ␣ detected ␣ ({ drift :.2 f }) ␣ -␣
+
+resetting " )
+
+return None
+
+# Step 3: Generate trade candidate
+proposed_trade = self . _generate_trade ( market_conditions )
+
+if proposed_trade is None :
+
+return None
+
+# Step 4: Identity validation
+valid , violations = self . identity . validate_trade (
+
+proposed_trade )
+
+if not valid :
+
+self . log ( f " Trade ␣ violates ␣ identity : ␣ { violations } " )
+return None
+
+# Step 5: Multi - layer authentication
+is_authentic = self . authenticator . authenticate (
+
+proposed_trade ,
+market_conditions ,
+self
+
+)
+
+if not is_authentic :
+
+self . log ( " Trade ␣ failed ␣ authentication " )
+return None
+
+# All three MCH layers passed
+self . log ( f " Trade ␣ authenticated ␣ with ␣ RCI ={ self_coherence :.2 f }
+
+" )
+
+return proposed_trade
+
+def _ ente r_co nfuse d_st ate ( self ) :
+
+"""
+Bot enters self - doubt mode when RCI drops
+"""
+self . state = " CONFUSED "
+
+# Analyze recent failures
+recent_losses = [ t for t in self . trade_log [ -10:] if t [ ’ pnl ’]
+
+< 0]
+
+self . log ( f " Entering ␣ confused ␣ state . ␣ Recent ␣ losses : ␣ { len (
+
+recent_losses ) } " )
+
+self . log ( " Pausing ␣ trading ␣ to ␣ recalibrate ␣ self - model " )
+
+# Bot questions itself
+self . _ a n a l y z e _ r e c e n t _ p e r f o r m a n c e ()
+
+def _reinforce_identity ( self ) :
+
+17
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+87
+
+88
+
+89
+
+90
+
+91
+
+92
+
+93
+
+94
+
+95
+
+96
+
+97
+
+98
+
+99
+
+100
+
+101
+
+102
+
+103
+
+104
+
+105
+
+106
+
+107
+
+108
+
+109
+
+110
+
+111
+
+112
+
+113
+
+114
+
+115
+
+116
+
+117
+
+118
+
+119
+
+120
+
+121
+
+122
+
+123
+
+124
+
+125
+
+126
+
+127
+
+128
+
+129
+
+130
+
+131
+
+132
+
+133
+
+134
+
+135
+
+136
+
+137
+
+138
+
+139
+
+140
+
+141
+
+142
+
+"""
+Reset to core principles when drift detected
+"""
+self . log ( " Identity ␣ drift ␣ detected ␣ -␣ reinforcing ␣ core ␣
+
+principles " )
+
+# Close any positions that don ’t match identity
+for position in self . positions :
+
+if not self . identity . validate_trade ( position ) [0]:
+
+self . log ( f " Closing ␣ position ␣ { position . id } ␣ -␣ identity
+
+␣ mismatch " )
+
+self . _close_position ( position )
+
+# Reset behavioral parameters to core
+self . state = " ACTIVE "
+
+def _generate_trade ( self , market ) :
+
+"""
+Generate Iron Condor trade based on conditions
+"""
+# Only trade if conditions are right
+if not self . _should_trade_today ( market ) :
+
+return None
+
+nifty_spot = market . nifty_spot
+vix = market . vix
+
+# Dynamic strike selection based on VIX
+if vix < 15:
+
+offset = 200
+elif 15 <= vix < 20:
+offset = 250
+
+# Normal offset
+
+# Wider strikes
+
+else :
+
+return None
+
+# Too volatile
+
+# Construct Iron Condor
+trade = IronCondor (
+
+spot = nifty_spot ,
+call_short_strike = nifty_spot + offset ,
+call_long_strike = nifty_spot + offset + 200 ,
+put_short_strike = nifty_spot - offset ,
+put_long_strike = nifty_spot - offset - 200 ,
+expiry = self . _next_tuesday () ,
+risk_amount = self . capital * 0.02
+
+)
+
+return trade
+
+def _should_trade_today ( self , market ) :
+
+"""
+Day - of - week and market filters
+"""
+today = market . timestamp . strftime ( ’% A ’) . lower ()
+days_to_expiry = self . _days_to_expiry ( market . timestamp )
+
+# Don ’t trade Monday / Tuesday ( too close to expiry )
+if today in [ ’ monday ’ , ’ tuesday ’ ]:
+
+return False
+
+18
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+143
+
+144
+
+145
+
+146
+
+147
+
+148
+
+149
+
+150
+
+151
+
+152
+
+153
+
+154
+
+155
+
+156
+
+157
+
+158
+
+159
+
+160
+
+161
+
+162
+
+163
+
+164
+
+165
+
+166
+
+167
+
+168
+
+169
+
+170
+
+171
+
+172
+
+173
+
+174
+
+175
+
+176
+
+177
+
+178
+
+179
+
+180
+
+181
+
+182
+
+183
+
+184
+
+185
+
+186
+
+187
+
+188
+
+189
+
+190
+
+191
+
+192
+
+193
+
+194
+
+195
+
+196
+
+197
+
+198
+
+199
+
+200
+
+# Don ’t trade if < 3 days to expiry
+if days_to_expiry < 3:
+
+return False
+
+# VIX filter
+if market . vix >= 22:
+return False
+
+return True
+
+def execute_trade ( self , trade ) :
+
+"""
+Execute authenticated trade
+"""
+self . log ( f " Executing ␣ trade : ␣ { trade } " )
+
+# Execute via broker API
+order_ids = self . _place_spread_order ( trade )
+
+# Add to positions
+self . positions . append ( trade )
+
+# Update trade log with full context
+self . trade_log . append ({
+
+’ timestamp ’: datetime . now () ,
+’ trade ’: trade ,
+’ rci ’: self . rci . calculate () ,
+’ vix ’: trade . market_conditions . vix ,
+’ authentication_score ’: trade . auth_score
+
+})
+
+def monitor_positions ( self ) :
+
+"""
+Monitor and manage open positions
+"""
+for position in self . positions :
+
+# Check P & L
+current_pnl = self . _calculate_pnl ( position )
+max_profit = position . max_profit
+
+# Profit target reached
+if current_pnl >= max_profit * 0.60:
+
+self . log ( f " Profit ␣ target ␣ reached ␣ for ␣ { position . id } " )
+self . _close_position ( position )
+continue
+
+# Stop loss triggered
+if current_pnl <= - max_profit * 1.50:
+
+self . log ( f " Stop ␣ loss ␣ triggered ␣ for ␣ { position . id } " )
+self . _close_position ( position )
+continue
+
+# Check days to expiry
+dte = self . _days_to_expiry ( datetime . now () )
+
+# Exit Monday (T -1)
+if dte == 1:
+
+19
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+201
+
+202
+
+203
+
+204
+
+205
+
+206
+
+207
+
+208
+
+209
+
+210
+
+211
+
+212
+
+self . log ( f "T -1 ␣ exit ␣ for ␣ { position . id } " )
+self . _close_position ( position )
+continue
+
+# VIX spike check
+current_vix = self . _get_current_vix ()
+entry_vix = position . entry_vix
+
+if current_vix > entry_vix * 1.20:
+
+# 20% VIX increase
+
+self . log ( f " VIX ␣ spike ␣ detected ␣ for ␣ { position . id } " )
+self . _close_position ( position )
+continue
+
+Listing 6: Conscious Trading Bot — Main Class
+
+4.6 Key Differences: Traditional vs Conscious Bot
+
+Aspect
+Decision Making
+Error Handling
+Identity
+Trade Validation
+Performance Tracking
+
+Traditional Bot
+Rule-based execution
+Fails or continues blindly
+Parameters can drift
+Passes filters → trade
+Logs results
+
+Adaptation
+
+Static rules
+
+Conscious Bot (MCH)
+Self-aware validation
+Detects confusion, pauses
+Core identity enforced
+Multi-layer authentication
+Models self, predicts be-
+havior
+Dynamic based on coher-
+ence
+
+Table 6: Traditional Bot vs MCH-Inspired Bot
+
+20
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+4.7 Practical Advantages
+
+Why MCH Architecture Is Superior
+
+1. Self-Monitoring:
+
+(cid:136) Bot knows when it’s confused (low RCI)
+
+(cid:136) Automatically pauses when self-model breaks
+
+(cid:136) Prevents cascading losses from poor states
+
+2. Identity Stability:
+
+(cid:136) Core strategy never drifts
+
+(cid:136) Resists emotional/random deviations
+
+(cid:136) Maintains discipline across market regimes
+
+3. Intelligent Validation:
+
+(cid:136) Multi-layer authentication reduces false signals
+
+(cid:136) Only executes high-confidence trades
+
+(cid:136) Logs reasoning for every decision
+
+4. Recursive Learning:
+
+(cid:136) Bot learns from pattern mismatches
+
+(cid:136) Improves self-model over time
+
+(cid:136) Adapts without losing identity
+
+21
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+5 Bot 2 Implementation Roadmap
+
+5.1 Development Phases
+
+5.1.1 Phase 1: Core Infrastructure (Week 1-2)
+
+Tasks:
+
+1. Set up project structure with MCH components
+
+2. Implement RCI calculation module
+
+3. Implement OIA (identity) module
+
+4. Implement AT (authenticator) module
+
+5. Create comprehensive logging system
+
+6. Set up paper trading environment
+
+Deliverables:
+
+(cid:136) Working MCH framework skeleton
+
+(cid:136) Unit tests for each component
+
+(cid:136) Configuration file with core identity parameters
+
+5.1.2 Phase 2: Strategy Implementation (Week 3)
+
+Tasks:
+
+1. Implement Iron Condor strategy logic
+
+2. Implement Credit Spread alternatives
+
+3. Add VIX-based filters
+
+4. Add time-based filters (day/hour)
+
+5. Implement dynamic strike selection
+
+6. Add support/resistance detection
+
+Deliverables:
+
+(cid:136) Complete strategy modules
+
+(cid:136) Integration with Zerodha Kite API
+
+(cid:136) Backtesting framework
+
+22
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+5.1.3 Phase 3: Risk Management (Week 4)
+
+Tasks:
+
+1. Implement position sizing (2% rule)
+
+2. Implement stop loss automation
+
+3. Implement profit target automation
+
+4. Add Monday exit logic (T-1)
+
+5. Add VIX spike protection
+
+6. Implement spread order execution
+
+Deliverables:
+
+(cid:136) Complete risk management system
+
+(cid:136) Automated position monitoring
+
+(cid:136) Emergency exit procedures
+
+5.1.4 Phase 4: Testing & Deployment (Week 5-6)
+
+Tasks:
+
+1. Paper trading for 2-3 weeks
+
+2. Monitor RCI, OIA drift, AT pass rate
+
+3. Compare Bot 1 vs Bot 2 performance
+
+4. Fine-tune thresholds based on data
+
+5. Deploy to Railway/cloud
+
+6. Set up Telegram notifications
+
+Deliverables:
+
+(cid:136) Validated bot ready for live trading
+
+(cid:136) Performance comparison report
+
+(cid:136) Deployment documentation
+
+5.2 Configuration Template
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+# bot_config . py
+
+CONFIG = {
+
+# Capital Management
+’ capital ’: 100000 ,
+’ risk_per_trade ’: 0.02 ,
+’ max_positions ’: 2 ,
+
+# Rs 1 lakh
+
+# MCH Parameters
+’ rci ’: {
+
+’ memory_depth ’: 30 ,
+
+# 2% rule
+
+23
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+
+46
+
+47
+
+48
+
+49
+
+50
+
+51
+
+52
+
+53
+
+54
+
+55
+
+56
+
+57
+
+58
+
+59
+
+60
+
+61
+
+62
+
+63
+
+64
+
+65
+
+66
+
+67
+
+68
+
+69
+
+’ min_threshold ’: 0.60 ,
+’ target_threshold ’: 0.80
+
+} ,
+
+’ oia ’: {
+
+’ max_drift ’: 0.20 ,
+’ check_interval ’: ’ daily ’
+
+} ,
+
+’ authentication ’: {
+
+’ threshold ’: 0.80 ,
+’ checks ’: [
+
+# 80% of checks must pass
+
+’ rci_check ’ ,
+’ identity_check ’ ,
+’ vix_check ’ ,
+’ timing_check ’ ,
+’ risk_check ’ ,
+’ technical_check ’
+
+]
+
+} ,
+
+# Core Identity ( NEVER changes )
+’ identity ’: {
+
+’ strategy_type ’: ’ iron_condor ’ ,
+’ expiry_day ’: ’ TUESDAY ’ ,
+’ entry_days ’: [ ’ wednesday ’ , ’ thursday ’ , ’ friday ’] ,
+’ entry_hours ’: [(10 , 15 , 11 , 0) , (14 , 15 , 14 , 45) ] ,
+’ min_days_to_expiry ’: 3 ,
+’ profit_target ’: 0.60 ,
+’ stop_loss_multiplier ’: 1.50
+
+} ,
+
+# VIX Filters
+’ vix ’: {
+
+’ max_for_entry ’: 18 ,
+’ caution_threshold ’: 22 ,
+’ spike_threshold ’: 1.20
+
+# 20% increase
+
+} ,
+
+# Strike Selection
+’ strikes ’: {
+
+’ base_offset ’: 200 ,
+’ spread_width ’: 200 ,
+’ dynamic ’: True ,
+’ vix_multiplier ’: {
+
+# points OTM
+
+# adjust based on VIX
+
+12: 200 ,
+15: 250 ,
+20: 300
+
+# VIX < 15
+# VIX 15 -20
+# VIX 20 -22
+
+}
+
+} ,
+
+# Logging
+’ logging ’: {
+
+’ level ’: ’ INFO ’ ,
+’ log_decisions ’: True ,
+’ log_authentication ’: True ,
+’ log_rci ’: True ,
+’ log_identity_checks ’: True
+
+24
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+}
+
+70
+
+71
+
+}
+
+Listing 7: Bot 2 Configuration File
+
+5.3 Success Metrics
+
+Bot 2 must demonstrate:
+
+1. Win Rate: ≥ 65%
+
+2. RCI Stability: Average RCI ≥ 0.75
+
+3. Identity Drift: < 0.15 consistently
+
+4. Authentication Pass Rate: ≥ 80%
+
+5. Max Drawdown: < 15%
+
+6. Monthly Returns: 5-10%
+
+7. Sharpe Ratio: > 1.5
+
+8. Zero Margin Violations
+
+25
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+6 Questions for Multi-AI Consultation
+
+6.1 For Nandi (ChatGPT) — Philosophy & Strategy
+
+1. Given Bot 1’s performance, what philosophical approach should guide Bot 2’s development?
+
+2. How do we balance systematic rules with adaptive flexibility in the MCH framework?
+
+3. What risk management principles from other domains (medicine, aviation, etc.) apply to
+
+conscious bot architecture?
+
+4. How should we think about the 30% of losing trades? Is this acceptable? How to minimize
+
+emotional impact?
+
+5. What’s the optimal balance between Iron Condor (neutral) and Credit Spreads (directional)?
+
+6. Does the MCH concept of “identity stability” translate well to trading, or are there philo-
+
+sophical gaps?
+
+7. How to prevent the bot from becoming overly conservative when RCI drops?
+
+6.2 For Deepseek — Technical Excellence
+
+1. What’s the best code architecture for a multi-strategy bot with MCH components?
+
+2. How to implement spread orders correctly to avoid Bot 1’s margin issue?
+
+3. What data structures optimize RCI calculation with O(1) lookups?
+
+4. How to handle API failures mid-trade without corrupting bot state?
+
+5. What’s the most efficient way to calculate cosine similarity for pattern matching?
+
+6. Should we use async/await for Kite API calls, or stick with synchronous?
+
+7. How to implement graceful degradation when authentication fails?
+
+8. Best practices for logging in production without performance impact?
+
+9. How to structure unit tests for the MCH components?
+
+10. Database choice for trade history: SQLite, PostgreSQL, or document store?
+
+6.3 For Gemini — Strategic Analysis
+
+1. Under what specific market conditions should Bot 2 NOT trade?
+
+2. How to quantify “market regime” (trending vs ranging) mathematically?
+
+3. What combination of indicators gives highest accuracy for Iron Condor entry?
+
+4. Should we use machine learning for strike selection? If yes, which algorithm?
+
+5. How to balance multiple filters without over-optimization?
+
+6. What’s the optimal memory depth (K) for RCI calculation?
+
+7. How to detect when the market is about to break out of range?
+
+8. Should Bot 2 have different strategies for different VIX regimes?
+
+26
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+9. How to incorporate FII/DII data into the decision framework?
+
+10. What’s the relationship between GIFT Nifty and next-day NIFTY behavior that we can
+
+exploit?
+
+6.4 For Grok — Market Psychology
+
+1. How does Tuesday expiry change trader behavior compared to Thursday?
+
+2. What psychological traps should the MCH-inspired bot avoid?
+
+3. How to handle FOMO when market is volatile but bot is paused (low RCI)?
+
+4. Best way to recover psychologically from consecutive losses?
+
+5. Does Bot 2 need “market sentiment” analysis? How to implement?
+
+6. How do retail traders typically behave on Monday (T-1 day)?
+
+7. What’s the psychology behind pin risk on expiry day?
+
+8. Should the bot “fear” certain market conditions more than others?
+
+9. How to build in contrarian thinking (e.g., when PCR extreme)?
+
+10. Can we learn anything from behavioral economics for bot design?
+
+6.5 For Claude (Integration Lead) — Execution
+
+1. How to integrate all 5 AI perspectives into a coherent Bot 2 strategy?
+
+2. What’s the best testing methodology for paper trading duration?
+
+3. Deployment: Continue with Railway or explore alternatives (AWS, Heroku)?
+
+4. How should the bot “learn” from its own performance over time?
+
+5. What’s the roadmap for Bot 3, Bot 4, Bot 5 evolution?
+
+6. How to present Bot 2 results for medical journal publication (trading + consciousness)?
+
+7. Should we open-source the MCH trading framework?
+
+8. How to handle regulatory compliance with automated trading in India?
+
+9. What documentation is needed for reproducibility?
+
+10. How to make Bot 2 teachable to other doctors/retail traders?
+
+27
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+7 Comprehensive Comparison Tables
+
+7.1 Strategy Comparison Matrix
+
+Strategy
+Iron Condor
+Credit Spread
+Butterfly
+Short Strangle
+Covered Call
+
+Risk Reward Win Rate Complexity Capital Best Market
+Range-bound
+Trending
+Stable
+Range
+Neutral-Bull
+
+Medium
+Low-Med
+Low
+Very High
+Very High
+
+60-70%
+55-65%
+30-40%
+50-60%
+70-80%
+
+Table 7: Options Strategy Comparison
+
+7.2 Bot 1 vs Bot 2 Feature Comparison
+
+Feature
+Expiry Awareness
+Self-Awareness (RCI)
+Identity Stability (OIA)
+Trade Validation (AT)
+VIX Filter
+Market Condition Check
+Strike Selection
+Position Sizing
+Entry Timing
+Exit Logic
+Stop Loss
+Spread Orders
+Logging
+
+Bot 1 (Baseline)
+Hard-coded Thursday
+None
+Parameters can drift
+Basic filters
+No filter
+Trades always
+Fixed offsets
+Fixed lots
+Any time
+Hold till expiry
+Not implemented
+Leg-by-leg
+Basic
+
+Self-Doubt Mechanism
+Identity Drift Detection
+Adjustment Strategies
+Weekend Risk Manage-
+ment
+
+None
+None
+None
+Ignored
+
+Bot 2 (MCH-Inspired)
+Dynamic Tuesday
+Monitors own coherence
+Core identity enforced
+Multi-layer authentication
+Entry only if VIX < 18-22
+Skips unfavorable conditions
+Dynamic based on VIX
+2% risk rule
+10:15-11:00 AM or 2:15-2:45 PM
+60% profit OR Monday EOD
+Automated at 150% max profit
+Combo orders (better margins)
+Comprehensive
+reasoning)
+Pauses when confused
+Alerts and resets
+Roll, close side, convert
+Factors 4-day gap (Fri(cid:25)Tue)
+
+(VIX, Greeks,
+
+Table 8: Bot 1 vs Bot 2 Detailed Comparison
+
+28
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+8 Glossary
+
+8.1 Options Trading Terms
+
+ATM At The Money — Strike price closest to current NIFTY price
+
+CE Call Option (European style)
+
+Delta Rate of change of option price relative to underlying
+
+Gamma Rate of change of delta (acceleration of price movement)
+
+ITM In The Money — Option with intrinsic value
+
+IV Implied Volatility — Market’s expectation of future volatility
+
+OI Open Interest — Total outstanding contracts
+
+OTM Out of The Money — Option with no intrinsic value
+
+PCR Put-Call Ratio — Sentiment indicator
+
+PE Put Option (European style)
+
+Premium Price of the option contract
+
+Spread Difference between bid and ask price; also refers to multi-leg strategies
+
+Theta Rate of time decay (how much option loses value per day)
+
+Vega Sensitivity to changes in volatility
+
+VIX Volatility Index (“Fear Gauge”)
+
+8.2 MCH Framework Terms
+
+Authentication (AT) Process of validating that actions align with system identity
+
+Coherence Degree of consistency between predicted and actual states
+
+Identity Drift Deviation of current behavior from core principles
+
+MCH Mirror-Coherence Hypothesis — Consciousness as recursive self-modeling
+
+Observer Identity Axis (OIA) Stable structural element maintaining self-identity
+
+Recursive Self-referential; system modeling its own states
+
+Recursive Coherence Index (RCI) Metric measuring quality of self-modeling
+
+Self-Awareness System’s ability to monitor and understand its own state
+
+29
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+9 References & Resources
+
+9.1 Academic & Theoretical
+
+1. Mirror-Coherence Hypothesis (MCH) Framework — Dr. Laxman M M, 2025
+
+2. Options Pricing Theory — Black-Scholes Model
+
+3. Behavioral Finance — Kahneman & Tversky
+
+4. Market Microstructure — O’Hara, 1995
+
+9.2 Regulatory & Official
+
+1. NSE India Options Chain: https://www.nseindia.com
+
+2. SEBI Guidelines on Algorithmic Trading
+
+3. NSE Circular on Tuesday Expiry (June 23, 2025)
+
+4. India VIX Methodology: https://www.nseindia.com/products/content/equities/indices/
+
+india_vix.htm
+
+9.3 Educational Resources
+
+1. Zerodha Varsity — Free Options Education: https://zerodha.com/varsity
+
+2. Sensibull — Options Analytics: https://sensibull.com
+
+3. Opstra — Strategy Builder: https://opstra.definedge.com
+
+4. TradingView — Charts & Technical Analysis: https://www.tradingview.com
+
+9.4 Tools & Platforms
+
+1. Zerodha Kite — Trading Platform & API
+
+2. Python 3.x — Programming Language
+
+3. Railway — Cloud Deployment
+
+4. Telegram — Notification Service
+
+5. VS Code with GitHub Copilot — Development Environment
+
+30
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+10 Appendices
+
+10.1 Appendix A: Sample Trade Scenarios
+
+10.1.1 Scenario 1: Ideal Iron Condor Entry
+
+Market Conditions:
+
+(cid:136) Date: Wednesday, 10:30 AM
+
+(cid:136) NIFTY Spot: 24,000
+
+(cid:136) VIX: 15.5
+
+(cid:136) Days to Expiry: 6
+
+(cid:136) Trend: Sideways (oscillating around 20 EMA)
+
+Bot 2 Decision Process:
+
+1. RCI Check: 0.82 (High coherence)
+
+2. OIA Check: Identity drift 0.08
+
+3. AT Checks:
+
+(cid:136) VIX < 18:
+(cid:136) Valid day:
+(cid:136) Valid time:
+(cid:136) Technical:
+(cid:136) Risk:
+
+(15.5)
+
+(Wednesday)
+
+(10:30 AM)
+
+(Away from S/R)
+
+(2% rule respected)
+
+4. Authentication Score: 100% (6/6 checks passed)
+
+5. Decision: EXECUTE TRADE
+
+Trade Structure:
+
+50
+24 ,400 CE @ Rs
+Buy
+Sell 24 ,200 CE @ Rs 150
+Sell 23 ,800 PE @ Rs 140
+40
+23 ,600 PE @ Rs
+Buy
+
+Net Credit : Rs 200
+Max Profit : Rs 200
+Max Loss : Rs 200
+Risk - Reward : 1:1
+Capital Allocated : Rs 2 ,000 (2% of Rs 1 lakh )
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+10.1.2 Scenario 2: Bot Pauses (Low RCI)
+
+Market Conditions:
+
+(cid:136) Bot has had 3 consecutive losing trades
+
+(cid:136) RCI dropped from 0.80 to 0.55
+
+(cid:136) Recent behavior doesn’t match self-model
+
+31
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+Bot 2 Response:
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+[2025 -10 -30 10:30:00] RCI calculated : 0.55
+[2025 -10 -30 10:30:01] WARNING : RCI below threshold (0.60)
+[2025 -10 -30 10:30:01] Entering CONFUSED state
+[2025 -10 -30 10:30:01] Analyzing recent failures ...
+[2025 -10 -30 10:30:02] Last 10 trades : 3 wins , 7 losses
+[2025 -10 -30 10:30:02] Common factor : All entries during high VIX
+
+( >20)
+
+[2025 -10 -30 10:30:02] Action : Pausing trading until RCI recovers
+[2025 -10 -30 10:30:02] Reinforcing identity : No trades above VIX 20
+
+Outcome: Bot self-corrects and waits for favorable conditions.
+
+10.2 Appendix B: Code Repository Structure
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+bot2 - mch /
+
+config /
+
+bot_config . py
+identity_core . py
+
+# Main configuration
+# Core identity parameters
+
+mch /
+
+rci . py
+oia . py
+authenticator . py
+
+# RCI calculation
+# Identity management
+# Trade authentication
+
+strategies /
+
+iron_condor . py
+credit_spread . py
+strategy_base . py
+
+trading /
+
+kite_helper . py
+position_manager . py
+risk_manager . py
+
+# Broker API integration
+# Position tracking
+# Risk management
+
+filters /
+
+utils /
+
+vix_filter . py
+timing_filter . py
+technical_filter . py
+
+logger . py
+telegram_notifier . py
+data_storage . py
+
+main . py
+requirements . txt
+README . md
+
+# Main bot loop
+
+10.3 Appendix C: Backtesting Results Template
+
+32
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+Metric
+Total Trades
+Winning Trades
+Losing Trades
+Average Win
+Average Loss
+Largest Win
+Largest Loss
+Total P&L
+Return on Capital
+Max Drawdown
+Sharpe Ratio
+Average RCI
+Identity Drift (max)
+Authentication Pass Rate
+
+Value
+50
+33 (66%)
+17 (34%)
+8,500
+12,000
+15,000
+18,000
+76,500
+76.5%
+12.3%
+1.82
+0.78
+0.13
+84%
+
+Table 9: Sample Backtest Results (3 months)
+
+11 Conclusion
+
+11.1 Summary of Innovations
+
+This document presents the first known application of consciousness theory (MCH) to algorith-
+mic trading. The key contributions are:
+
+1. Theoretical Bridge: Successfully mapping MCH principles (RCI, OIA, AT) to trading bot
+
+architecture
+
+2. Self-Aware Systems: Creating bots that monitor their own coherence and pause when
+
+confused
+
+3. Identity Preservation: Preventing strategy drift through persistent identity axis
+
+4. Multi-Layer Validation: Authenticating trades through multiple consistency checks
+
+5. Practical Application: Combining cutting-edge theory with proven options strategies
+
+(Iron Condor)
+
+11.2 Expected Impact
+
+For Trading:
+
+(cid:136) More robust bots that fail gracefully
+
+(cid:136) Reduced false signals through authentication
+
+(cid:136) Better risk management via self-monitoring
+
+(cid:136) Novel approach to algorithmic trading
+
+For AI Research:
+
+(cid:136) First practical implementation of MCH framework
+
+(cid:136) Demonstrates value of consciousness-inspired design
+
+(cid:136) Opens new research direction: conscious algorithms
+
+(cid:136) Potential publication in interdisciplinary journals
+
+33
+
+MCH-Inspired Trading Bot Architecture
+
+Dr. Laxman M M
+
+11.3 Next Steps
+
+1. Multi-AI Consultation: Gather insights from Nandi, Deepseek, Gemini, Grok
+
+2. Build Bot 2: Implement MCH architecture in Python
+
+3. Paper Trade: Validate for 4-6 weeks
+
+4. Compare: Bot 1 vs Bot 2 performance
+
+5. Iterate: Refine based on real-world data
+
+6. Scale: Deploy Bot 3, 4, 5 with enhanced capabilities
+
+7. Publish: Document findings for academic community
+
+11.4 Final Thoughts
+
+The Conscious Trading Bot represents more than just an automated trading system — it’s a
+proof-of-concept for applying consciousness principles to practical AI systems. By giving the
+bot the ability to:
+
+(cid:136) Know when it’s confused (RCI)
+
+(cid:136) Maintain who it is (OIA)
+
+(cid:136) Validate its own decisions (AT)
+
+We create a system that’s not just intelligent, but self-aware. Whether this constitutes
+“consciousness” in any philosophical sense is debatable, but the practical benefits are clear:
+more robust, reliable, and trustworthy automation.
+
+“The question is not whether machines can think,
+but whether they can know when they shouldn’t.”
+
+— Dr. Laxman M M, October 2025
+
+Document Status: Ready for Multi-AI Consultation
+Prepared by: Dr. Laxman M M
+Date: October 25, 2025
+Version: 1.0 — Comprehensive Guide
+
+34
+
+
