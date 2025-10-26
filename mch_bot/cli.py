@@ -21,6 +21,11 @@ def main() -> None:
     p_live.add_argument("--config", required=True, type=Path)
     p_live.add_argument("--dry-run", action="store_true", help="Force dry-run (no broker actions)")
 
+    # Live continuous loop
+    p_live_loop = sub.add_parser("live-loop", help="Continuous market-hours scanning and re-entry")
+    p_live_loop.add_argument("--config", required=True, type=Path)
+    p_live_loop.add_argument("--interval", required=False, type=int, default=60, help="Seconds between scans")
+
     # Kite auth
     p_auth = sub.add_parser("kite-auth", help="Exchange request_token for access_token and save locally")
     p_auth.add_argument("--api-key", required=False, help="Kite API key (optional if in env or secrets)")
@@ -58,6 +63,12 @@ def main() -> None:
     if args.cmd == "live":
         cfg = load_config(args.config)
         run_live(cfg, force_dry_run=bool(args.dry_run))
+        return
+
+    if args.cmd == "live-loop":
+        from .engine import run_live_loop
+        cfg = load_config(args.config)
+        run_live_loop(cfg, interval_seconds=int(args.interval))
         return
 
     if args.cmd == "kite-auth":

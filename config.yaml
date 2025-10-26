@@ -1,4 +1,4 @@
-# Minimal configuration for the MCH-inspired bot
+﻿# Minimal configuration for the MCH-inspired bot
 
 mode: demo
 timezone: Asia/Kolkata
@@ -31,7 +31,7 @@ strategy:
   min_credit_per_ic: 1           # minimum net credit per condor
   # Legacy delta param kept for compatibility, not used by default
   target_delta: 0.15
-  entry_intraday_window: ["15:00", "15:05"]
+  entry_intraday_window: ["09:30", "15:00"]
   exit_intraday_window: ["15:10", "15:15"]
   min_days_to_expiry: 2
   # Dynamic planning inputs
@@ -52,6 +52,8 @@ execution:
   broker: paper
   dry_run: true
   slippage_bps: 2               # 2 basis points
+  cooldown_minutes: 30          # wait time after exit before re-entry
+  max_trades_per_day: 5         # cap daily trades to prevent over-trading
   api_min_interval_s: 0.25
   monitor_seconds: 120
   monitor_poll_seconds: 2.0
@@ -79,7 +81,7 @@ telegram_alerts:
   formatting:
     use_emojis: true
     time_format: "12h"
-    currency_symbol: "₹"
+    currency_symbol: "\u20B9"
   summary_schedule:
     enabled: true
     interval_minutes: 60

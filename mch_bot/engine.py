@@ -33,10 +33,33 @@ from .utils.ratelimit import RateLimiter
 from .market.iv import implied_vol_price
 from .market.quotes import quote_dict
 from .market import nse as nse
+import json
+from pathlib import Path as _Path
 
 
 log = logging.getLogger("engine")
 _prev_spot: Optional[float] = None
+
+
+# --- Simple on-disk state for live-loop re-entry control ---
+_STATE_FILE = _Path(".runtime/state.json")
+
+
+def _load_state() -> dict:
+    try:
+        if _STATE_FILE.exists():
+            return json.loads(_STATE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        pass
+    return {"position": "flat", "last_entry_ts": None, "last_exit_ts": None}
+
+
+def _save_state(d: dict) -> None:
+    try:
+        _STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        _STATE_FILE.write_text(json.dumps(d), encoding="utf-8")
+    except Exception:
+        pass
 
 
 @dataclass
@@ -498,6 +521,14 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
     if isinstance(broker, PaperBroker):
         broker.place_orders(orders)
         log.info("Simulated order placement with paper broker.")
+        # Mark state as active, then immediately flat (paper mode) to enable re-entry in loop
+        st = _load_state()
+        st["position"] = "active"
+        st["last_entry_ts"] = now.isoformat()
+        _save_state(st)
+        st["position"] = "flat"
+        st["last_exit_ts"] = datetime.now(timezone.utc).isoformat()
+        _save_state(st)
     else:
         # Liquidity check via kite.quote (OI and volume)
         min_oi = int(cfg.get("liquidity.min_oi", 1000))
@@ -516,6 +547,11 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
         log.info("Placing LIMIT orders with Zerodha Kite.")
         broker.place_orders(orders)
         log.info("Orders sent to broker. Starting simple monitor for TP/SL.")
+        # Mark state active
+        st = _load_state()
+        st["position"] = "active"
+        st["last_entry_ts"] = now.isoformat()
+        _save_state(st)
 
         # Simple monitor loop: close when net exit value crosses thresholds
         take_pct = float(cfg.get("risk.take_profit_pct", 50.0))
@@ -567,3 +603,78 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
                 close_orders.append(Order(symbol=o.symbol, expiry=o.expiry, strike=o.strike, option_type=o.option_type, side="SELL", qty=o.qty, price=px))
         broker.place_orders(close_orders)
         log.info("Close orders sent to broker.")
+        # Mark state flat
+        st = _load_state()
+        st["position"] = "flat"
+        st["last_exit_ts"] = datetime.now(timezone.utc).isoformat()
+        _save_state(st)
+
+
+def run_live_loop(cfg: Config, interval_seconds: int = 60) -> None:
+    """Continuously scan and (re)enter when flat, during market hours.
+
+    - Respects market hours from config
+    - After an exit, immediately resumes scanning
+    - Sleeps `interval_seconds` between scans
+    """
+    setup_logging()
+    mh = MarketHours(
+        tz=str(cfg.get("timezone", "Asia/Kolkata")),
+        open_time=str(cfg.get("market.open", "09:15")),
+        close_time=str(cfg.get("market.close", "15:30")),
+        holidays=set(cfg.get("market.holidays", []) or []),
+        weekdays=None,
+    )
+    log.info("Starting continuous live loop scanner.")
+    while True:
+        now = datetime.now(timezone.utc)
+        if not mh.is_open(now):
+            nxt = mh.next_open(now)
+            wait = max(5, int((nxt - now).total_seconds()))
+            log.info(f"Market closed. Sleeping until next open at {nxt}.")
+            time.sleep(min(wait, 3600))
+            continue
+        state = _load_state()
+
+        # Enforce daily trade cap
+        today = now.date().isoformat()
+        trades_today_date = state.get("trades_today_date")
+        if trades_today_date != today:
+            state["trades_today_date"] = today
+            state["trades_today_count"] = 0
+            _save_state(state)
+        max_trades = int(cfg.get("execution.max_trades_per_day", 10))
+
+        # Enforce cooldown after last exit
+        cooldown_min = int(cfg.get("execution.cooldown_minutes", 0))
+        if state.get("position") == "flat":
+            if state.get("trades_today_count", 0) >= max_trades:
+                log.info(f"Daily trade limit reached ({state.get('trades_today_count')} >= {max_trades}). Skipping.")
+            else:
+                in_cooldown = False
+                let = state.get("last_exit_ts")
+                if let and cooldown_min > 0:
+                    try:
+                        last_exit = datetime.fromisoformat(let)
+                        elapsed = (now - last_exit).total_seconds() / 60.0
+                        if elapsed < cooldown_min:
+                            in_cooldown = True
+                            log.info(f"In cooldown ({elapsed:.1f} < {cooldown_min} min). Skipping entry.")
+                    except Exception:
+                        pass
+                if not in_cooldown:
+                    try:
+                        prev_entry = state.get("last_entry_ts")
+                        # Force dry-run flag from CLI/config remains respected within run_live
+                        run_live(cfg, force_dry_run=bool(cfg.get("execution.dry_run", True)))
+                        # If an entry happened, last_entry_ts will change; count a trade
+                        new_state = _load_state()
+                        if new_state.get("last_entry_ts") and new_state.get("last_entry_ts") != prev_entry:
+                            new_state["trades_today_count"] = int(new_state.get("trades_today_count", 0)) + 1
+                            new_state["trades_today_date"] = today
+                            _save_state(new_state)
+                    except Exception as e:
+                        log.warning(f"live-loop iteration failed: {e}")
+        else:
+            log.info("Position active; skipping entry this iteration.")
+        time.sleep(max(5, int(interval_seconds)))
