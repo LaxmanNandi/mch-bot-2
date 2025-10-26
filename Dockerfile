@@ -22,3 +22,4 @@ COPY . .
 # Default command: safe dry-run
 CMD ["python","-m","mch_bot","live","--config","config.yaml","--dry-run"]
 
+
