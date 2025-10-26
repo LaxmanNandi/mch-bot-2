@@ -17,10 +17,10 @@ instrument:
   underlying_symbol_zerodha: "NSE:NIFTY 50"
 
 risk:
-  account_equity: 1_000_000     # INR
+  account_equity: 200_000       # INR (updated actual trading capital)
   max_risk_per_trade_pct: 2.0   # 2% rule
   max_positions: 1
-  stop_loss_pct: 25.0           # per-leg SL from credit
+  stop_loss_pct: 100.0          # total position SL from credit received
   take_profit_pct: 50.0         # per-position target from credit
 
 strategy:
@@ -31,7 +31,7 @@ strategy:
   min_credit_per_ic: 1           # minimum net credit per condor
   # Legacy delta param kept for compatibility, not used by default
   target_delta: 0.15
-  entry_intraday_window: ["09:30", "15:00"]
+  entry_intraday_window: ["09:30", "12:00"]
   exit_intraday_window: ["15:10", "15:15"]
   min_days_to_expiry: 2
   # Dynamic planning inputs
@@ -44,7 +44,7 @@ strategy:
 
 mch:
   rci_threshold: 0.0            # minimum coherence to allow trading
-  vix_bounds: [12.0, 22.0]      # sensible regime for condors
+  vix_bounds: [12.0, 20.0]      # stay out when VIX > 20
   trend_neutrality_max_adx: 20  # favor range conditions
   stability_lookback: 5         # bars for coherence averaging
 

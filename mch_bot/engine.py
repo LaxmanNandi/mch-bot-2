@@ -232,24 +232,28 @@ def run_backtest(cfg: Config, data_path: Path) -> None:
                 should_exit = True
             # price updated exit value
             iv_use = float(bar.iv) if bar.iv is not None else 0.18
-            exit_val = 0.0
+            # Compute buyback debit (positive): shorts are bought back (debit += p), longs are sold (debit -= p)
+            buyback_debit = 0.0
             for leg in entry_ic.legs:
                 p = black_scholes(
                     bar.close, leg.strike, expiry_t_from_days(max(min_dte - 1, 0)), r, iv_use, leg.option_type
                 )
-                signed = p if leg.side == "BUY" else -p
-                exit_val += signed
-            if exit_val <= entry_credit * (1 - float(cfg.get("risk.take_profit_pct", 50.0)) / 100.0):
+                buyback_debit += p if leg.side == "SELL" else -p
+            target_buyback = entry_credit * (1 - float(cfg.get("risk.take_profit_pct", 50.0)) / 100.0)
+            stop_buyback = entry_credit * (1 + float(cfg.get("risk.stop_loss_pct", 100.0)) / 100.0)
+            if buyback_debit <= target_buyback:
+                should_exit = True
+            if buyback_debit >= stop_buyback:
                 should_exit = True
 
             if should_exit and entry_bar is not None:
-                pnl = entry_credit - exit_val
+                pnl = entry_credit - buyback_debit
                 trades.append(
                     TradeResult(
                         entry_time=entry_bar.ts.to_pydatetime(),
                         exit_time=bar.ts.to_pydatetime(),
                         net_credit_per_unit=entry_credit,
-                        net_exit_per_unit=exit_val,
+                        net_exit_per_unit=buyback_debit,
                         pnl_per_unit=pnl,
                     )
                 )
@@ -610,7 +614,7 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
 
         # Simple monitor loop: close when net exit value crosses thresholds
         take_pct = float(cfg.get("risk.take_profit_pct", 50.0))
-        stop_pct = float(cfg.get("risk.stop_loss_pct", 25.0))
+        stop_pct = float(cfg.get("risk.stop_loss_pct", 100.0))
         entry_credit = ic.net_credit
         target_buyback = entry_credit * (1.0 - take_pct / 100.0)
         stop_buyback = entry_credit * (1.0 + stop_pct / 100.0)
