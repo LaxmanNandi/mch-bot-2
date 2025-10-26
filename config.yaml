@@ -4,10 +4,10 @@ mode: demo
 timezone: Asia/Kolkata
 
 market:
-  open: "00:00"
-  close: "23:59"
+  open: "09:15"
+  close: "15:30"
   holidays: []
-  weekdays: [MON, TUE, WED, THU, FRI, SAT, SUN]
+  weekdays: [MON, TUE, WED, THU, FRI]
 
 instrument:
   symbol: NIFTY
