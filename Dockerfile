@@ -14,10 +14,11 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
 
 # Install Python deps first to leverage Docker layer cache
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt\n# Install Playwright browser\nRUN python -m playwright install --with-deps chromium
 
 # Copy app source
 COPY . .
 
 # Default command: safe dry-run
 CMD ["python","-m","mch_bot","live","--config","config.yaml","--dry-run"]
+
