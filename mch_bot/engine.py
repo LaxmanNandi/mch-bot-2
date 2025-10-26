@@ -35,6 +35,7 @@ from .market.quotes import quote_dict
 from .market import nse as nse
 import json
 from pathlib import Path as _Path
+from .notifications import NotificationManager, NotificationConfig
 
 
 log = logging.getLogger("engine")
@@ -43,6 +44,8 @@ _prev_spot: Optional[float] = None
 
 # --- Simple on-disk state for live-loop re-entry control ---
 _STATE_FILE = _Path(".runtime/state.json")
+_TRADES_FILE = _Path(".runtime/trades.jsonl")
+_NOTIFIER: Optional[NotificationManager] = None
 
 
 def _load_state() -> dict:
@@ -60,6 +63,35 @@ def _save_state(d: dict) -> None:
         _STATE_FILE.write_text(json.dumps(d), encoding="utf-8")
     except Exception:
         pass
+
+
+def _append_trade(rec: dict) -> None:
+    try:
+        _TRADES_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with _TRADES_FILE.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
+def _get_notifier(cfg: Config) -> Optional[NotificationManager]:
+    global _NOTIFIER
+    if _NOTIFIER is not None:
+        return _NOTIFIER
+    if not bool(cfg.get("notifications.enabled", True)):
+        return None
+    nc = NotificationConfig(
+        enabled=True,
+        immediate_alerts=bool(cfg.get("notifications.telegram.immediate_alerts", True)),
+        daily_summary=bool(cfg.get("notifications.telegram.daily_summary", True)),
+        weekly_report=bool(cfg.get("notifications.telegram.weekly_report", True)),
+        retry_attempts=int(cfg.get("notifications.retry_attempts", 3)),
+        queue_size=int(cfg.get("notifications.queue_size", 50)),
+        tz=str(cfg.get("timezone", "Asia/Kolkata")),
+    )
+    _NOTIFIER = NotificationManager(nc)
+    _NOTIFIER.start()
+    return _NOTIFIER
 
 
 @dataclass
@@ -526,6 +558,29 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
         st["position"] = "active"
         st["last_entry_ts"] = now.isoformat()
         _save_state(st)
+        # Send entry alert (paper)
+        try:
+            nf = _get_notifier(cfg)
+            if nf is not None and ic.legs:
+                sp = next(l.strike for l in ic.legs if l.side=='SELL' and l.option_type=='PUT')
+                sc = next(l.strike for l in ic.legs if l.side=='SELL' and l.option_type=='CALL')
+                width = float(cfg.get("strategy.wing_width_points", 400))
+                data = {
+                    'time_str': now.astimezone().strftime('%I:%M %p'),
+                    'spot': spot,
+                    'short_put': sp,
+                    'long_put': sp - width,
+                    'short_call': sc,
+                    'long_call': sc + width,
+                    'credit_rupees': ic.net_credit * lot,
+                    'credit_pts': ic.net_credit,
+                    'target_rupees': ic.net_credit * lot * 0.5,
+                    'sl_rupees': ic.net_credit * lot * 1.0,
+                    'cooldown': int(cfg.get("execution.cooldown_minutes", 0)),
+                }
+                nf.send_immediate_alert('entry', data)
+        except Exception:
+            pass
         st["position"] = "flat"
         st["last_exit_ts"] = datetime.now(timezone.utc).isoformat()
         _save_state(st)
@@ -608,6 +663,63 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
         st["position"] = "flat"
         st["last_exit_ts"] = datetime.now(timezone.utc).isoformat()
         _save_state(st)
+        # Send exit alert (Kite)
+        try:
+            nf = _get_notifier(cfg)
+            if nf is not None:
+                # Approx fields from context
+                entry_rupees = entry_credit * lot
+                # Estimate exit debit using latest ltps
+                try:
+                    ltps = ltp_dict(broker.kite, syms)
+                    exit_debit = sum((ltps.get(o.symbol, o.price)) for o in orders if o.side == 'SELL') \
+                                  - sum((ltps.get(o.symbol, o.price)) for o in orders if o.side == 'BUY')
+                except Exception:
+                    exit_debit = entry_rupees * 0.5
+                pnl_rupees = entry_rupees - exit_debit
+                pnl_pct = (pnl_rupees / entry_rupees * 100.0) if entry_rupees else 0.0
+                # Persist trade record for summaries
+                try:
+                    tzname = str(cfg.get("timezone", "Asia/Kolkata"))
+                    try:
+                        from zoneinfo import ZoneInfo
+                        local_dt = datetime.now(timezone.utc).astimezone(ZoneInfo(tzname))
+                    except Exception:
+                        local_dt = datetime.now()
+                    date_local = local_dt.strftime('%Y-%m-%d')
+                    # Strikes from built IC if available
+                    sp = next((l.strike for l in ic.legs if l.side=='SELL' and l.option_type=='PUT'), None)
+                    sc = next((l.strike for l in ic.legs if l.side=='SELL' and l.option_type=='CALL'), None)
+                    width = float(cfg.get("strategy.wing_width_points", 400))
+                    trec = {
+                        "date_local": date_local,
+                        "entry_ts": st.get("last_entry_ts"),
+                        "exit_ts": st.get("last_exit_ts"),
+                        "entry_rupees": entry_rupees,
+                        "exit_rupees": exit_debit,
+                        "pnl_rupees": pnl_rupees,
+                        "pnl_pct": pnl_pct,
+                        "short_put": sp,
+                        "short_call": sc,
+                        "width": width,
+                        "lots": lot,
+                    }
+                    _append_trade(trec)
+                except Exception:
+                    pass
+                data = {
+                    'time_str': datetime.now().astimezone().strftime('%I:%M %p'),
+                    'duration': 'n/a',
+                    'entry_rupees': entry_rupees,
+                    'exit_rupees': exit_debit,
+                    'pnl_rupees': pnl_rupees,
+                    'pnl_pct': pnl_pct,
+                    'reason': 'Target/SL/Time',
+                    'next_ready': 'after cooldown',
+                }
+                nf.send_immediate_alert('exit', data)
+        except Exception:
+            pass
 
 
 def run_live_loop(cfg: Config, interval_seconds: int = 60) -> None:

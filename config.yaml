@@ -85,3 +85,12 @@ telegram_alerts:
   summary_schedule:
     enabled: true
     interval_minutes: 60
+
+notifications:
+  enabled: true
+  telegram:
+    immediate_alerts: true
+    daily_summary: true
+    weekly_report: true
+  retry_attempts: 3
+  queue_size: 50
