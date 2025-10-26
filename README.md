@@ -1,10 +1,10 @@
-MCH-Inspired NIFTY Options Bot (Prototype)
+﻿MCH-Inspired NIFTY Options Bot (Prototype)
 
-This repository contains a minimal, working prototype of a "Conscious Trading Bot" inspired by the Mirror‑Coherence Hypothesis (MCH). It includes:
+This repository contains a minimal, working prototype of a "Conscious Trading Bot" inspired by the Mirrorâ€‘Coherence Hypothesis (MCH). It includes:
 
 - MCH layers: RCI (coherence scoring), OIA (identity/guardrails), AT (authentication threshold)
 - Strategy: Iron Condor (weekly options), with simple sizing and exits
-- Execution: Paper broker (dry‑run) and a simplistic backtester using synthetic data
+- Execution: Paper broker (dryâ€‘run) and a simplistic backtester using synthetic data
 - Configurable via YAML
 
 Status: Prototype for demonstration and extension. Live brokerage not wired.
@@ -23,7 +23,7 @@ python -m pip install -r requirements.txt
 python -m mch_bot backtest --config config.yaml --data data/sample_underlying.csv
 ```
 
-3) Dry‑run live loop (no broker actions)
+3) Dryâ€‘run live loop (no broker actions)
 
 ```
 python -m mch_bot live --config config.yaml --dry-run
@@ -31,13 +31,13 @@ python -m mch_bot live --config config.yaml --dry-run
 
 Files
 
-- `mch_bot/` — Bot package
-- `config.yaml` — Editable config (instrument, risk, strategy, MCH)
-- `data/sample_underlying.csv` — Synthetic underlying series (close + iv)
+- `mch_bot/` â€” Bot package
+- `config.yaml` â€” Editable config (instrument, risk, strategy, MCH)
+- `data/sample_underlying.csv` â€” Synthetic underlying series (close + iv)
 
 Notes
 
-- Backtester uses Black‑Scholes pricing from underlying close and implied vol (iv) to approximate option premiums at entry/exit. This is illustrative, not production‑accurate.
+- Backtester uses Blackâ€‘Scholes pricing from underlying close and implied vol (iv) to approximate option premiums at entry/exit. This is illustrative, not productionâ€‘accurate.
 - To connect to a real broker (e.g., Kite, Angel, Upstox), implement a new adapter under `mch_bot/brokers/` using `BrokerBase`.
 - Zerodha Kite adapter included. Steps:
    1. Install deps: `python -m pip install -r requirements.txt`
@@ -53,7 +53,7 @@ Configuration tips
 - Verify instrument details in `config.yaml`:
   - `instrument.symbol: NIFTY`
   - `instrument.underlying_symbol_zerodha: "NSE:NIFTY 50"`
-  - `instrument.weekly_expiry_weekday: THU`
+  - `instrument.weekly_expiry_weekday: TUE`
   - `instrument.strike_step: 50`
 - Market hours gating:
   - `market.open: 09:15`, `market.close: 15:30`, `market.holidays: []`, `timezone: Asia/Kolkata`
@@ -61,18 +61,19 @@ Configuration tips
 
 Live strike selection (by delta)
 
-- Live mode estimates spot via `instrument.underlying_symbol_zerodha` (default `NSE:NIFTY 50`) and picks short strikes whose absolute Black‑Scholes delta is closest to `strategy.target_delta`. It uses `strategy.iv_assumption` as the implied vol unless you extend it to infer IV from the option chain. Wings are set by `strategy.wing_width_points`.
+- Live mode estimates spot via `instrument.underlying_symbol_zerodha` (default `NSE:NIFTY 50`) and picks short strikes whose absolute Blackâ€‘Scholes delta is closest to `strategy.target_delta`. It uses `strategy.iv_assumption` as the implied vol unless you extend it to infer IV from the option chain. Wings are set by `strategy.wing_width_points`.
  - The live flow now:
    - Loads instruments once and resolves tradingsymbols from the dump (no string guessing)
    - Gets spot LTP and infers ATM IV from CE/PE LTPs (fallback to `strategy.iv_assumption`)
-   - Scans strikes to pick true‑delta shorts and builds wings
+   - Scans strikes to pick trueâ€‘delta shorts and builds wings
    - Places entry LIMIT orders and monitors net buyback vs TP/SL
    - Sends offsetting close orders when TP/SL hit or timeout (see `execution.monitor_seconds`)
 
 Caveats
 
-- Holidays and special expiry shifts aren’t handled. `instrument.weekly_expiry_weekday` controls the weekday used for weekly expiry selection.
+- Holidays and special expiry shifts arenâ€™t handled. `instrument.weekly_expiry_weekday` controls the weekday used for weekly expiry selection.
 - Zerodha quotes and instruments require a valid `access_token`; run `kite-auth` first.
  - The monitor loop is intentionally simple; for production, add robust order/fill tracking, error handling, and persistence.
  - The live cycle respects basic market hours from config. Adjust times/holidays as needed for tests.
 - Always validate against exchange rules and your risk policy. This is not financial advice.
+

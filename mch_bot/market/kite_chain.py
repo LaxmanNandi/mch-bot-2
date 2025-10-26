@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 from dataclasses import dataclass
@@ -96,7 +96,7 @@ def load_instruments(kite: KiteConnect, force_refresh: bool = False) -> List[Ins
     return result
 
 
-def next_weekly_expiry(now: datetime, weekday: str = "THU", tz: str = "Asia/Kolkata") -> datetime:
+def next_weekly_expiry(now: datetime, weekday: str = "TUE", tz: str = "Asia/Kolkata") -> datetime:
     # Compute next occurrence of given weekday in local TZ
     tzinfo = pytz.timezone(tz)
     local_now = now.astimezone(tzinfo)
@@ -143,4 +143,5 @@ def nearest_by_strike(chain: List[Instrument], strike: float, opt_type: str) -> 
 
 def strikes_from_chain(chain: List[Instrument]) -> List[float]:
     return sorted({float(i.strike) for i in chain})
+
 

@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
@@ -350,7 +350,7 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
                 pass
         rl.wait()
         if expiry_dt is None:
-            weekday = str(cfg.get("instrument.weekly_expiry_weekday", "THU"))
+            weekday = str(cfg.get("instrument.weekly_expiry_weekday", "TUE"))
             expiry_dt = next_weekly_expiry(now, weekday=weekday)
         if sigma is None and spot is not None and expiry_dt is not None:
             chain = filter_chain(instruments, underlying_name=str(cfg.get("instrument.symbol", "NIFTY")), expiry_date=expiry_dt)
@@ -678,3 +678,4 @@ def run_live_loop(cfg: Config, interval_seconds: int = 60) -> None:
         else:
             log.info("Position active; skipping entry this iteration.")
         time.sleep(max(5, int(interval_seconds)))
+

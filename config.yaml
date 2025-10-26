@@ -12,7 +12,7 @@ market:
 instrument:
   symbol: NIFTY
   lot_size: 75
-  weekly_expiry_weekday: THU  # NSE weekly expiry (check current exchange calendar)
+  weekly_expiry_weekday: TUE  # NSE weekly expiry (Tuesday)
   strike_step: 50
   underlying_symbol_zerodha: "NSE:NIFTY 50"
 
