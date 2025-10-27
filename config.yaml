@@ -18,7 +18,7 @@ instrument:
 
 risk:
   account_equity: 200_000       # INR (updated actual trading capital)
-  max_risk_per_trade_pct: 2.0   # 2% rule
+  max_risk_per_trade_pct: 3.5   # ADJUSTED: 3.5% to allow 100-pt wings (was 2.0%)
   max_positions: 1
   stop_loss_pct: 100.0          # total position SL from credit received
   take_profit_pct: 50.0         # per-position target from credit
@@ -27,7 +27,8 @@ strategy:
   name: iron_condor
   # Balanced IC selection by distance around spot
   target_distance_points: 300    # approx OTM distance from spot per short leg (200-500 recommended)
-  wing_width_points: 400         # equal width on both sides (300-500 recommended)
+  wing_width_points: 100         # OPTIMIZED: 100 pts = Rs.7,500 max loss/lot (was 400)
+  wing_width_auto: false         # Set true to calculate dynamically based on risk
   min_credit_per_ic: 1           # minimum net credit per condor
   # Legacy delta param kept for compatibility, not used by default
   target_delta: 0.15
@@ -37,14 +38,14 @@ strategy:
   # Dynamic planning inputs
   risk_profile: moderate         # conservative | moderate | aggressive
   target_credit_points: 90       # target net credit (points per unit)
-  max_loss_limit: 30000          # INR per condor (approx)
+  max_loss_limit: 10000          # INR per lot: reduced from 30k to allow position sizing
   preferred_delta: 0.20          # short legs, used if chain deltas available
   min_otm_distance: 200
   max_otm_distance: 500
 
 mch:
   rci_threshold: 0.0            # minimum coherence to allow trading
-  vix_bounds: [12.0, 20.0]      # stay out when VIX > 20
+  vix_bounds: [11.0, 20.0]      # LOWERED from 12.0 to 11.0 (current VIX 11.86)
   trend_neutrality_max_adx: 20  # favor range conditions
   stability_lookback: 5         # bars for coherence averaging
 

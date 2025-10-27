@@ -293,7 +293,22 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
     lot = int(cfg.get("instrument.lot_size", 75))
     step = float(cfg.get("instrument.strike_step", 50))
     target_delta = float(cfg.get("strategy.target_delta", 0.15))
-    wing = float(cfg.get("strategy.wing_width_points", 400))
+
+    # Wing width: auto-calculate or use configured value
+    wing_auto = bool(cfg.get("strategy.wing_width_auto", False))
+    if wing_auto:
+        # Calculate optimal wing width based on account risk
+        equity = float(cfg.get("risk.account_equity", 200000))
+        risk_pct = float(cfg.get("risk.max_risk_per_trade_pct", 2.0))
+        target_max_loss = equity * (risk_pct / 100) * 1.8  # 1.8x safety margin
+        wing = int(target_max_loss / lot)
+        # Round to nearest 50
+        wing = int(round(wing / 50) * 50)
+        log.info(f"Auto-calculated wing width: {wing} points (target max loss: Rs.{target_max_loss:,.0f})")
+    else:
+        wing = float(cfg.get("strategy.wing_width_points", 100))
+        log.info(f"Using configured wing width: {wing} points")
+
     min_credit = float(cfg.get("strategy.min_credit_per_ic", 1))
     target_distance = float(cfg.get("strategy.target_distance_points", 300))
     r = float(cfg.get("backtest.risk_free_rate", 0.06))
@@ -406,18 +421,25 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
     if sigma is None:
         sigma = float(cfg.get("strategy.iv_assumption", cfg.get("demo.iv", 0.18)))
 
-    # Dynamic width via VIX
+    # Dynamic width via VIX (only if not using base wing from config/auto-calc)
     def dynamic_width(vix: Optional[float]) -> float:
         if vix is None:
             return wing
+        # VIX-based adjustment: scale wing width by volatility
+        # Low VIX (< 15): use base wing
+        # Medium VIX (15-25): increase by 20%
+        # High VIX (> 25): increase by 50%
         if vix < 15:
-            return 300.0
+            return wing
         elif vix < 25:
-            return 400.0
+            return wing * 1.2
         else:
-            return 500.0
+            return wing * 1.5
 
-    wing = dynamic_width(vix_val)
+    wing_adjusted = dynamic_width(vix_val)
+    if wing_adjusted != wing:
+        log.info(f"VIX-adjusted wing width: {wing_adjusted:.0f} points (VIX: {vix_val})")
+        wing = wing_adjusted
 
     # Plan: scan OTM distances to hit target credit while obeying max loss
     target_credit_points = float(cfg.get("strategy.target_credit_points", 90))
