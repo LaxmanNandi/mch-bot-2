@@ -67,9 +67,11 @@ demo:
   iv: 0.18
 
 data_sources:
-  use_kite: true
+  use_kite: true              # Primary and only data source - Zerodha Kite
   use_yahoo_fallback: false
   vix_symbol_kite: "NSE:INDIA VIX"
+  # NSE India API removed - using only Zerodha Kite for all market data
+  # This eliminates timestamp staleness warnings from NSE API
 
 liquidity:
   min_oi: 1000

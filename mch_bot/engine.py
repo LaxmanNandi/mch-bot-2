@@ -32,7 +32,8 @@ from .market.hours import MarketHours
 from .utils.ratelimit import RateLimiter
 from .market.iv import implied_vol_price
 from .market.quotes import quote_dict
-from .market import nse as nse
+# NSE API removed - using only Zerodha Kite for data sources
+# from .market import nse as nse
 import json
 from pathlib import Path as _Path
 from .notifications import NotificationManager, NotificationConfig
@@ -322,94 +323,82 @@ def run_live(cfg: Config, force_dry_run: bool = False) -> None:
         log.info("Market is closed (per config). Exiting live cycle.")
         return
 
-    # Determine expiry and spot/iv
-    # Helper: optional Kite client for data even in dry-run
+    # Determine expiry and spot/iv - using only Zerodha Kite
     kite_data = None
-    if bool(cfg.get("data_sources.use_kite", True)):
-        try:
-            kite_data = KiteBroker()
-        except Exception:
-            kite_data = None
+    try:
+        kite_data = KiteBroker()
+        log.info("KiteBroker initialized for live data fetching")
+    except Exception as e:
+        log.error(f"Failed to initialize KiteBroker: {e}")
+        return
 
-    # Live data: prefer NSE, fallback to Kite
-    prefer_kite = bool(cfg.get("data_sources.use_kite", True))
     expiry_dt = None
     spot = None
     sigma = None
     vix_val = None
 
-    # Try NSE first
-    spot_idx = nse.fetch_spot_index("NIFTY 50")
-    if spot_idx:
-        spot = float(spot_idx.spot)
-    vix = nse.fetch_vix()
-    if vix:
-        vix_val = float(vix[0])
-    chain_json = nse.fetch_option_chain_indices("NIFTY")
-    if chain_json:
-        # Data freshness by server timestamp
-        server_ts = chain_json.get("records", {}).get("timestamp")
-        if not nse.is_data_fresh(server_ts, now):
-            log.warning("NSE chain timestamp stale. Falling back to Kite for chain.")
-        else:
-            expiry_str = nse.nearest_expiry_from_chain(chain_json, now)
-            if expiry_str:
-                rows = nse.chain_for_expiry(chain_json, expiry_str)
-                if spot is not None:
-                    ivs = []
-                    for p in nse.extract_chain_points(rows):
-                        k = float(p["strike"])
-                        ce = float(p["ce_ltp"]) or 0.0
-                        pe = float(p["pe_ltp"]) or 0.0
-                        if ce > 0:
-                            iv = implied_vol_price(ce, spot, k, max(1/252, 5/365), r, "CALL")
-                            if iv: ivs.append(iv)
-                        if pe > 0:
-                            iv = implied_vol_price(pe, spot, k, max(1/252, 5/365), r, "PUT")
-                            if iv: ivs.append(iv)
-                    if ivs:
-                        sigma = float(np.median(np.array(ivs)))
-                try:
-                    expiry_dt = datetime.strptime(expiry_str, "%d-%b-%Y").replace(tzinfo=now.tzinfo)
-                except Exception:
-                    expiry_dt = None
+    # Fetch all data from Kite only
+    rl = RateLimiter(min_interval_s=float(cfg.get("execution.api_min_interval_s", 0.25)))
+    instruments = load_instruments(kite_data.kite)
+    underlying = str(cfg.get("instrument.underlying_symbol_zerodha", "NSE:NIFTY 50"))
+    vix_symbol = str(cfg.get("data_sources.vix_symbol_kite", "NSE:INDIA VIX"))
 
-    # Fallback to Kite for missing pieces
-    if (spot is None or expiry_dt is None or sigma is None) and kite_data is not None and prefer_kite:
-        rl = RateLimiter(min_interval_s=float(cfg.get("execution.api_min_interval_s", 0.25)))
-        instruments = load_instruments(kite_data.kite)
-        underlying = str(cfg.get("instrument.underlying_symbol_zerodha", "NSE:NIFTY 50"))
-        if spot is None:
-            try:
-                spot = float(ltp_dict(kite_data.kite, [underlying]).get(underlying))
-            except Exception:
-                pass
-        rl.wait()
-        if expiry_dt is None:
-            weekday = str(cfg.get("instrument.weekly_expiry_weekday", "TUE"))
-            expiry_dt = next_weekly_expiry(now, weekday=weekday)
-        if sigma is None and spot is not None and expiry_dt is not None:
+    # 1. Fetch spot price from Kite
+    try:
+        spot = float(ltp_dict(kite_data.kite, [underlying]).get(underlying))
+        log.info(f"Kite spot price: {spot}")
+    except Exception as e:
+        log.error(f"Failed to fetch spot from Kite: {e}")
+        return
+    rl.wait()
+
+    # 2. Fetch VIX from Kite
+    try:
+        vix_val = float(ltp_dict(kite_data.kite, [vix_symbol]).get(vix_symbol))
+        log.info(f"Kite VIX: {vix_val}")
+    except Exception as e:
+        log.warning(f"Failed to fetch VIX from Kite: {e}")
+        vix_val = None
+    rl.wait()
+
+    # 3. Determine expiry date
+    weekday = str(cfg.get("instrument.weekly_expiry_weekday", "TUE"))
+    expiry_dt = next_weekly_expiry(now, weekday=weekday)
+    log.info(f"Calculated expiry date: {expiry_dt.strftime('%d-%b-%Y')}")
+
+    # 4. Fetch options chain and calculate IV from Kite
+    if spot is not None and expiry_dt is not None:
+        try:
             chain = filter_chain(instruments, underlying_name=str(cfg.get("instrument.symbol", "NIFTY")), expiry_date=expiry_dt)
             sigma_default = float(cfg.get("strategy.iv_assumption", cfg.get("demo.iv", 0.18)))
             points = build_chain_points(kite_data.kite, chain, spot=spot, t_years=max(1/252, (expiry_dt - now).days/365), r=r)
             ivs = [p.iv for p in points if p.iv is not None]
             sigma = float(np.median(np.array(ivs))) if ivs else sigma_default
+            log.info(f"Calculated IV (median): {sigma:.4f} from {len(ivs)} points")
+        except Exception as e:
+            log.warning(f"Failed to calculate IV from Kite chain: {e}")
+            sigma = float(cfg.get("strategy.iv_assumption", cfg.get("demo.iv", 0.18)))
+            log.info(f"Using fallback IV: {sigma}")
 
     # Abort if still missing essentials
     if spot is None or expiry_dt is None:
-        log.warning("Live data unavailable (spot/expiry). Aborting trading to avoid stale data.")
+        log.error("Live data unavailable (spot/expiry). Aborting trading cycle.")
         return
 
-    # Static data detection: if spot hasn't changed since last run, re-fetch once
+    # Track spot for staleness detection
     global _prev_spot
     if _prev_spot is not None and abs(float(spot) - float(_prev_spot)) < 1e-9:
-        log.warning("Spot equals previous value; attempting another live fetch to avoid static data.")
-        spot_retry = nse.fetch_spot_index("NIFTY 50")
-        if spot_retry:
-            spot = float(spot_retry.spot)
-        else:
-            log.warning("Failed to refresh spot; aborting to avoid stale data.")
-            return
+        log.warning("Spot equals previous value; re-fetching to verify data freshness.")
+        try:
+            rl.wait()
+            spot_retry = float(ltp_dict(kite_data.kite, [underlying]).get(underlying))
+            if spot_retry and abs(spot_retry - spot) > 1e-9:
+                spot = spot_retry
+                log.info(f"Spot refreshed: {spot}")
+            else:
+                log.warning("Spot unchanged after retry - continuing with current value")
+        except Exception as e:
+            log.warning(f"Failed to refresh spot: {e} - continuing with current value")
     _prev_spot = float(spot)
 
     # Finalize time to expiry
