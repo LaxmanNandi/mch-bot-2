@@ -39,10 +39,29 @@ class KiteBroker(BrokerBase):
         api_secret: Optional[str] = None,
         access_token: Optional[str] = None,
     ) -> None:
+        import logging
+        log = logging.getLogger("KiteBroker")
+
         secrets = _load_secrets_file()
         self.api_key = api_key or os.getenv("KITE_API_KEY") or secrets.get("api_key")
         self.api_secret = api_secret or os.getenv("KITE_API_SECRET") or secrets.get("api_secret")
-        self.access_token = access_token or os.getenv("KITE_ACCESS_TOKEN") or secrets.get("access_token")
+
+        # Token loading with explicit source tracking
+        token_source = "none"
+        if access_token:
+            self.access_token = access_token
+            token_source = "constructor"
+        elif os.getenv("KITE_ACCESS_TOKEN"):
+            self.access_token = os.getenv("KITE_ACCESS_TOKEN")
+            token_source = "env"
+        elif secrets.get("access_token"):
+            self.access_token = secrets.get("access_token")
+            token_source = "file"
+        else:
+            self.access_token = None
+            token_source = "none"
+
+        log.info(f"KiteBroker init: token_source={token_source}, token_tail={self.access_token[-6:] if self.access_token else 'N/A'}")
 
         if not self.api_key:
             raise RuntimeError("KiteBroker: missing api_key. Set env KITE_API_KEY or use kite-auth CLI.")

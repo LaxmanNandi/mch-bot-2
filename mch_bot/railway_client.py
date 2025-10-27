@@ -27,3 +27,35 @@ def update_env_variable(service_id: str, token: str, variables: Dict[str, Any]) 
         log.warning(f"Railway env update error: {e}")
         return False
 
+
+def restart_railway_service(service_id: str, token: str) -> bool:
+    """Restart Railway service to pick up new environment variables.
+
+    Uses Railway GraphQL API to trigger a deployment restart.
+    """
+    try:
+        url = "https://backboard.railway.app/graphql/v2"
+        headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+
+        # GraphQL mutation to redeploy the service
+        payload = {
+            "query": "mutation serviceInstanceRedeploy($serviceId: String!) { serviceInstanceRedeploy(serviceId: $serviceId) }",
+            "variables": {"serviceId": service_id}
+        }
+
+        resp = requests.post(url, json=payload, headers=headers, timeout=30)
+
+        if resp.status_code // 100 == 2:
+            data = resp.json()
+            if "errors" in data:
+                log.warning(f"Railway restart GraphQL errors: {data['errors']}")
+                return False
+            log.info(f"Railway service {service_id} restart triggered successfully")
+            return True
+
+        log.warning(f"Railway restart failed: {resp.status_code} {resp.text}")
+        return False
+    except Exception as e:
+        log.warning(f"Railway restart error: {e}")
+        return False
+

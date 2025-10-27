@@ -11,7 +11,7 @@ from typing import Optional
 import requests
 
 from .auth.kite_auth import load_creds_from_env, login_and_get_request_token, exchange_request_token_for_access
-from .railway_client import update_env_variable
+from .railway_client import update_env_variable, restart_railway_service
 
 
 log = logging.getLogger("token_refresh")
@@ -68,12 +68,41 @@ def refresh_token_once() -> Optional[str]:
     return access_token
 
 
-def propagate_to_railway(access_token: str) -> bool:
+def propagate_to_railway(access_token: str) -> dict:
+    """Update Railway env var and restart service.
+
+    Returns dict with 'env_updated' and 'restarted' booleans.
+    """
     svc = os.getenv("RAILWAY_SERVICE_ID")
     tok = os.getenv("RAILWAY_TOKEN")
+    result = {"env_updated": False, "restarted": False}
+
     if not svc or not tok:
-        return False
-    return update_env_variable(svc, tok, {"KITE_ACCESS_TOKEN": access_token})
+        log.warning("Railway credentials not found (RAILWAY_SERVICE_ID or RAILWAY_TOKEN)")
+        return result
+
+    # Step 1: Update environment variable
+    env_ok = update_env_variable(svc, tok, {"KITE_ACCESS_TOKEN": access_token})
+    result["env_updated"] = env_ok
+
+    if not env_ok:
+        log.warning("Failed to update Railway env var, skipping restart")
+        return result
+
+    log.info("Railway env var updated, triggering service restart...")
+
+    # Step 2: Restart service to pick up new env var
+    # Small delay to ensure env var update is propagated
+    time.sleep(2)
+    restart_ok = restart_railway_service(svc, tok)
+    result["restarted"] = restart_ok
+
+    if restart_ok:
+        log.info("Railway service restart triggered successfully")
+    else:
+        log.warning("Railway service restart failed - manual restart may be needed")
+
+    return result
 
 
 def run_refresh_workflow() -> None:
@@ -82,15 +111,27 @@ def run_refresh_workflow() -> None:
         acc = refresh_token_once()
         if not acc:
             raise RuntimeError("Token refresh returned None")
-        ok = propagate_to_railway(acc)
+
+        railway_result = propagate_to_railway(acc)
         st = _load_state()
         st.update({
             "last_refresh_utc": start.isoformat(),
             "access_token_tail": acc[-6:],
-            "railway_update": bool(ok),
+            "railway_env_updated": railway_result["env_updated"],
+            "railway_restarted": railway_result["restarted"],
         })
         _save_state(st)
-        _send_telegram(f"✅ <b>Kite token refreshed</b>\nTail: {acc[-6:]}\nRailway updated: {ok}")
+
+        # Enhanced Telegram notification
+        msg = f"✅ <b>Kite token refreshed</b>\n"
+        msg += f"Tail: {acc[-6:]}\n"
+        msg += f"Railway env updated: {railway_result['env_updated']}\n"
+        msg += f"Railway restarted: {railway_result['restarted']}"
+
+        if railway_result["env_updated"] and not railway_result["restarted"]:
+            msg += "\n⚠️ Service restart failed - manual restart needed!"
+
+        _send_telegram(msg)
     except Exception as e:
         _send_telegram(f"🚨 <b>Kite token refresh failed</b>\nError: {e}")
         raise
