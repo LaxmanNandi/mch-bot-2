@@ -1,0 +1,104 @@
+# MCH Bot 3.0 - Momentum Premium Buyer Configuration
+# CRITICAL: This is separate from Bot 2.0 Iron Condor config
+
+# CAPITAL & RISK (ADJUSTED FOR Rs. 30,000 LIVE TESTING)
+capital: 30000
+max_capital_per_trade_base: 0.35  # Base 35% = Rs. 10,500 per trade
+max_capital_per_trade_max: 0.45   # Max 45% = Rs. 13,500 per trade
+max_loss_per_trade: 4000          # Max Rs. 4,000 loss per trade
+max_daily_loss: 5000              # Max Rs. 5,000 loss per day
+max_weekly_loss: 10000            # Max Rs. 10,000 loss per week
+max_positions: 1                  # Only 1 position at a time (safer)
+
+# ENTRY FILTERS (GEMINI'S 5-FACTOR MODEL)
+entry:
+  dte_min: 10              # THE EDGE
+  dte_max: 14              # THE EDGE
+  strike_distance_min: 250 # Points OTM
+  strike_distance_max: 350
+
+  # Factor 3: Trend Filter
+  adx_threshold: 25
+  ema_period: 20
+
+  # Factor 4: Entry Filter
+  rsi_max: 70             # Not overbought
+
+  # Factor 5: Valuation Filter
+  iv_percentile_max: 80
+
+  # Time windows
+  entry_window_start: "09:30"
+  entry_window_end: "14:30"
+  avoid_first_minutes: 15
+  avoid_last_minutes: 15
+
+# EXIT RULES (GEMINI'S DYNAMIC TRAILING)
+exit:
+  # Profit target for partial exit
+  profit_target_pct: 75    # +75% triggers partial exit
+  partial_exit_pct: 0.50   # Exit 50% at target
+
+  # Stop loss
+  stop_loss_pct: 0.30      # -30% hard stop
+
+  # Time-based
+  time_exit_dte: 4         # Exit ALL when ≤ 4 DTE
+  wednesday_exit: true
+  wednesday_exit_time: "14:00"
+
+  # IV crush detection (GROK)
+  iv_crush_threshold: 0.10 # Exit if IV drops >10%
+
+  # Trailing stop method
+  trailing_method: "ema_20" # or "atr_1.5"
+
+# RISK ADJUSTMENTS (GROK)
+risk:
+  weekend_max_capital: 0.30  # Friday limit
+  event_max_capital: 0.20    # Before major events
+
+# REGIME CLASSIFICATION
+regime:
+  adx_trending: 25
+  adx_ranging: 20
+  vix_volatile: 20
+  atr_percentile_high: 75
+
+# EXECUTION (GROK'S REALISTIC COSTS)
+execution:
+  broker: "paper"            # paper or kite
+  dry_run: true              # Paper trading mode
+  slippage_rate: 0.075       # 7.5% average
+  brokerage_per_order: 20
+  tax_rate: 0.15             # STCG 15%
+
+# TELEGRAM
+telegram:
+  bot_token: ""              # From ENV
+  chat_id: ""                # From ENV
+  override_mode: "AUTO"      # CONFIRM, AUTO, or MANUAL (AUTO for simulation without Telegram)
+
+# KITE API
+kite:
+  api_key: ""                # From ENV
+  api_secret: ""             # From ENV
+  access_token: ""           # From ENV
+
+# INSTRUMENT
+instrument:
+  symbol: "NIFTY"
+  lot_size: 75
+  underlying_symbol_zerodha: "NSE:NIFTY 50"
+  strike_step: 50
+
+# MARKET HOURS
+market:
+  open: "09:15"
+  close: "15:30"
+  timezone: "Asia/Kolkata"
+  weekdays: ["MON", "TUE", "WED", "THU", "FRI"]
+
+# CRITICAL: NO ROLLING (Gemini Fix #1)
+rolling:
+  enabled: false             # MUST BE FALSE

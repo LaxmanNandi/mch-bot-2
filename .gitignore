@@ -1,16 +1,54 @@
-﻿__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# Environment and secrets
 .env
-.venv/
-logs/
+.env_bot3
 .secrets/
-.DS_Store
-Thumbs.db
-*.log
+*.token
 
-# build/dist
-build/
-dist/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 *.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.claude/
+
+# Data files
+*.json
+*.csv
+*.log
+logs/
+
+# Documentation drafts (keep deployment docs)
+NQAS_*.md
+NQAS_*.html
+*_Manual_*.md
+*_Manual_*.html
+look_alike_drugs_poster.html
+medical_kits_poster.html
+nqas_*.html
+
+# Analysis documents (keep important ones)
+NIFTY_MARKET_ANALYSIS_*.md
+NIFTY_OPENING_PREDICTION_*.md
+TOMORROW_TRADE_PLAN_*.md
+TRADE_PLAN_*.md
+
+# PDF generation scripts (not needed for bot)
+create_*_pdf*.py
+combine_*.py
+convert_to_pdf.py
+
+# Legal outputs
+legal_outputs/
+
+# Runtime
+.runtime/
